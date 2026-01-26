@@ -89,15 +89,14 @@ export function BlogPostList() {
           gap: 0.5rem;
         }
         .post-tag {
-          font-size: 0.75rem;
+          display: inline-flex;
           padding: 0.125rem 0.5rem;
+          background: var(--muted, #f3f4f6);
           border-radius: 0.25rem;
-          background-color: var(--gray-200, #e5e7eb);
-          color: var(--gray-600);
+          font-size: 0.8rem;
         }
         :root.dark .post-tag {
-          background-color: var(--gray-700, #374151);
-          color: var(--gray-300);
+          background: var(--muted, #27272a);
         }
       `}</style>
     </div>

@@ -1,9 +1,11 @@
 ## UI
 
+- Use Shadcn components for all new UI, use shadcn over classic html components
 - Ensure all buttons have hover/interactive states
+- ALWAYS use Tailwind for styling
 - ALWAYS use the theme for styling. Never use custom color codes
 - When using Playwright MCP for screenshots, use JPEG format
-- After UI changes to interactive elements (forms, radio buttons, modals), run `ui-validator` agent
+- After UI changes to interactive elements (forms, radio buttons, modals), run `ui-validator` agent; ALWAYS use this after UI changes to validate and not guess
   - Acceptance: clicking element X selects/activates element X (not a neighbor)
   - Acceptance: hover states visible, focus rings present
 
