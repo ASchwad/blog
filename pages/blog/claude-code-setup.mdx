@@ -2,18 +2,15 @@
 title: "Claude Code: My Setup and Learnings"
 date: 2026/1/26
 description: A walkthrough of my Claude Code configuration and workflow
-tag: AI, tooling
-author: You
 ---
 
-import { BlogNav } from "../../components/BlogNav";
-import Link from "next/link";
+import { BlogPostLayout } from "../../components/BlogPostLayout";
 
-<BlogNav />
-
-<Link href="/blog" className="back-to-blog">
-  &larr; Back to Blog posts
-</Link>
+<BlogPostLayout
+  title="Claude Code: My Setup and Learnings"
+  date="2026/1/26"
+  tags={["AI", "tooling"]}
+>
 
 ## My CC Journey and Usage
 
@@ -46,3 +43,5 @@ Initially I wasnt convinced on having it entirely in the Terminal - it was a sep
 - I didnt try Claude Cowork yet. Currently I think it's good for one-off tasks which require desktop access. For repeatable tasks, I'd prefer having scripts and reliable automation instead. That's cheaper and faster.
   With that said, I think Claude Code is similarly capable in non-coding tasks. I recently wrote a whole business plan with financial planning for a government grant application using Claude Code in VS Code. It worked really well using Markdown files and in the end creating PDF and Excel files. Software Engineering tooling like git and markdown is also perfect for this.
 - I think the bigger a codebase gets, the more context Claude will need to gather to understand logical dependencies. We also build increasingly more abstractions and tests. This overall leads to more inference time and requires more tokens as for smaller codebases. So I think for larger codebases, the session limits will be hit more often.
+
+</BlogPostLayout>

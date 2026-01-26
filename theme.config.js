@@ -2,6 +2,12 @@ const YEAR = new Date().getFullYear();
 
 export default {
   readMore: null, // Remove "Read More" links
+  dateFormatter: (date) =>
+    date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }),
   footer: (
     <footer>
       <small>
