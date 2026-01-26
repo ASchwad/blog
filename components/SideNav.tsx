@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export interface NavItem {
   year: string;
@@ -63,16 +64,11 @@ export function SideNav({ items }: SideNavProps) {
     };
   }, [items]);
 
-  const handleClick = (item: NavItem) => {
-    if (item.href) {
-      // Navigate to a different page
-      window.location.href = item.href;
-    } else {
-      // Scroll to element on same page
-      const element = document.getElementById(item.id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
+  const handleAnchorClick = (e: React.MouseEvent, item: NavItem) => {
+    e.preventDefault();
+    const element = document.getElementById(item.id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -86,25 +82,29 @@ export function SideNav({ items }: SideNavProps) {
             <ul>
               {itemsByYear[year].map((item) => (
                 <li key={item.id}>
-                  <a
-                    href={item.href || `#${item.id}`}
-                    onClick={(e) => {
-                      if (!item.href) {
-                        e.preventDefault();
-                      }
-                      handleClick(item);
-                    }}
-                    className={activeId === item.id ? "active" : ""}
-                  >
-                    {item.name}
-                  </a>
+                  {item.href ? (
+                    <Link
+                      href={item.href}
+                      className={activeId === item.id ? "active" : ""}
+                    >
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <a
+                      href={`#${item.id}`}
+                      onClick={(e) => handleAnchorClick(e, item)}
+                      className={activeId === item.id ? "active" : ""}
+                    >
+                      {item.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
           </div>
         );
       })}
-      <style jsx>{`
+      <style jsx global>{`
         .side-nav {
           position: sticky;
           top: 80px;
@@ -132,25 +132,25 @@ export function SideNav({ items }: SideNavProps) {
         .side-nav-year.year-active .side-nav-year-label {
           color: var(--gray-900);
         }
-        ul {
+        .side-nav ul {
           list-style: none;
           padding: 0;
           margin: 0;
         }
-        li {
+        .side-nav li {
           margin: 0.25rem 0;
         }
-        a {
+        .side-nav a {
           color: var(--gray-500);
           text-decoration: none;
           transition: color 0.15s ease;
           display: block;
           padding: 0.125rem 0;
         }
-        a:hover {
+        .side-nav a:hover {
           color: var(--gray-800);
         }
-        a.active {
+        .side-nav a.active {
           color: var(--gray-900);
           font-weight: 500;
         }
