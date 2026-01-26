@@ -18,9 +18,9 @@ export function Layout({ children }: LayoutProps) {
   const currentPath = router.pathname;
 
   return (
-    <div className="mx-auto max-w-2xl px-6 py-8">
-      <nav className="mb-8">
-        <ul className="flex gap-6">
+    <div className="mx-auto max-w-2xl px-6 py-12 sm:py-16">
+      <nav className="mb-12">
+        <ul className="flex gap-8">
           {navItems.map((item) => {
             const isActive =
               item.href === "/"
