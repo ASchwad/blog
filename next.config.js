@@ -7,6 +7,7 @@ const withNextra = require("nextra")({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // any configs you need
+  turbopack: {},
 };
 
 module.exports = withNextra(nextConfig);
