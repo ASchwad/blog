@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export interface NavItem {
   year: string;
@@ -13,8 +14,16 @@ interface SideNavProps {
 }
 
 export function SideNav({ items }: SideNavProps) {
-  // Default to first item on initial load
-  const [activeId, setActiveId] = useState<string>(items[0]?.id || "");
+  const router = useRouter();
+
+  // Find the active item based on current URL path
+  const getActiveIdFromPath = () => {
+    const currentPath = router.asPath;
+    const matchingItem = items.find((item) => item.href === currentPath);
+    return matchingItem?.id || items[0]?.id || "";
+  };
+
+  const [activeId, setActiveId] = useState<string>(getActiveIdFromPath());
 
   // Group items by year
   const itemsByYear = items.reduce((acc, item) => {
@@ -31,6 +40,15 @@ export function SideNav({ items }: SideNavProps) {
   const activeYear = items.find((p) => p.id === activeId)?.year || "";
 
   useEffect(() => {
+    // Update active state when route changes
+    setActiveId(getActiveIdFromPath());
+  }, [router.asPath]);
+
+  useEffect(() => {
+    // Only use IntersectionObserver for items without hrefs (same-page navigation)
+    const samePageItems = items.filter((item) => !item.href);
+    if (samePageItems.length === 0) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -42,7 +60,7 @@ export function SideNav({ items }: SideNavProps) {
       { rootMargin: "-20% 0px -60% 0px" }
     );
 
-    items.forEach((item) => {
+    samePageItems.forEach((item) => {
       const element = document.getElementById(item.id);
       if (element) observer.observe(element);
     });
@@ -51,8 +69,8 @@ export function SideNav({ items }: SideNavProps) {
     const handleScroll = () => {
       const scrolledToBottom =
         window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
-      if (scrolledToBottom && items.length > 0) {
-        setActiveId(items[items.length - 1].id);
+      if (scrolledToBottom && samePageItems.length > 0) {
+        setActiveId(samePageItems[samePageItems.length - 1].id);
       }
     };
 

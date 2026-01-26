@@ -1,8 +1,12 @@
 import { SideNav, NavItem } from "./SideNav";
 
 const posts: NavItem[] = [
-  { year: "2021", name: "Markdown Examples", id: "markdown", href: "/blog/markdown" },
-  { year: "2021", name: "Next.js Pages", id: "pages", href: "/blog/pages" },
+  {
+    year: "2026",
+    name: "Claude Code: My Setup and Learnings",
+    id: "claude-code-setup",
+    href: "/blog/claude-code-setup",
+  },
 ];
 
 export function BlogNav() {

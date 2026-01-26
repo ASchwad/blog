@@ -1,0 +1,48 @@
+---
+title: "Claude Code: My Setup and Learnings"
+date: 2026/1/26
+description: A walkthrough of my Claude Code configuration and workflow
+tag: AI, tooling
+author: You
+---
+
+import { BlogNav } from "../../components/BlogNav";
+import Link from "next/link";
+
+<BlogNav />
+
+<Link href="/blog" className="back-to-blog">
+  &larr; Back to Blog posts
+</Link>
+
+## My CC Journey and Usage
+
+Until July 2025 I have been mostly using AI Coding Assistance via Cursor before switching to Claude Code.
+Initially I wasnt convinced on having it entirely in the Terminal - it was a separate process from my regular workflow and I had to decide when to use it vs. doing the change directly myself. This separation was gone though when I stared using it in VS Code along with the Claude extension. Getting direct diffs in the editor made it much easier to verify and understand the changes. My usage has grown steadily: July-September just a Pro Plan, October-December with a Max Plan with almost never exceeding session limits but now since January I run into them more and also trigger the weekly limits. Probably moving soon to the bigger Max Plan.
+
+## Using tmux sessions
+
+## Using hooks
+
+## Setup settings.json
+
+## Setup CLAUDE.md
+
+## Subagents: UI-Validator
+
+## MCP: Playwright
+
+## ClaudeBar for tracking sessions
+
+## Classic Practices (lint, format, ...) help Claude Code too!
+
+## Central markdown docs
+
+## General notes and observations
+
+- Plan Mode is strong for complex changes and aligning expectations. Claude often correctly identifies architectural decisions and provides a handy list of the options.
+- Commit often. This is additional context for you **and** Claude. Especially when debugging, the commit history with good messages is a important data point. I also use Claude to write commit messages.
+- Let Claude use the CLI commands of your tools. e.g. the local Supabase CLI for database migrations works really well. IMO CLIs > MCP
+- I didnt try Claude Cowork yet. Currently I think it's good for one-off tasks which require desktop access. For repeatable tasks, I'd prefer having scripts and reliable automation instead. That's cheaper and faster.
+  With that said, I think Claude Code is similarly capable in non-coding tasks. I recently wrote a whole business plan with financial planning for a government grant application using Claude Code in VS Code. It worked really well using Markdown files and in the end creating PDF and Excel files. Software Engineering tooling like git and markdown is also perfect for this.
+- I think the bigger a codebase gets, the more context Claude will need to gather to understand logical dependencies. We also build increasingly more abstractions and tests. This overall leads to more inference time and requires more tokens as for smaller codebases. So I think for larger codebases, the session limits will be hit more often.

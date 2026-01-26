@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "next --webpack",
-    "dev:tmux": "PORT=$(node -e \"const net=require('net');let p=3000;(async()=>{while(p<3100){const sess=require('child_process').spawnSync('tmux',['has-session','-t','blog'],{stdio:'ignore'});if(sess.status===0){p++;continue}try{await new Promise((r,j)=>{const s=net.createServer();s.once('error',j);s.listen(p,()=>{s.close();r()})});console.log(p);break}catch{p++}}})()\") && tmux new-session -d -s blog -n 'Blog Dev' \"PORT=$PORT bun dev\" && echo \"Started on port $PORT - attaching to session blog\" && tmux attach -t blog",
+    "dev:tmux": "tmux has-session -t blog 2>/dev/null && tmux attach -t blog || (PORT=$(node -e \"const net=require('net');let p=3000;(async()=>{while(p<3100){try{await new Promise((r,j)=>{const s=net.createServer();s.once('error',j);s.listen(p,()=>{s.close();r()})});console.log(p);break}catch{p++}}})()\") && tmux new-session -d -s blog -n 'Blog Dev' \"PORT=$PORT bun dev\" && echo \"Started on port $PORT\" && tmux attach -t blog)",
     "build": "node ./scripts/gen-rss.js && next build",
     "start": "next start"
   },

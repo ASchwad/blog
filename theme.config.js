@@ -1,6 +1,7 @@
 const YEAR = new Date().getFullYear();
 
 export default {
+  readMore: null, // Remove "Read More" links
   footer: (
     <footer>
       <small>
