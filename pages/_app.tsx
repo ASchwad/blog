@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { Layout } from "../components/Layout";
 import "../styles/main.css";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -20,7 +21,9 @@ export default function App({ Component, pageProps }: AppProps) {
           crossOrigin="anonymous"
         />
       </Head>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }
