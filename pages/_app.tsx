@@ -7,6 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
+        <title>Alexander Schoenenwald</title>
         <link
           rel="alternate"
           type="application/rss+xml"
