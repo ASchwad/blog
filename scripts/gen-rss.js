@@ -21,12 +21,15 @@ async function generate() {
       );
       const frontmatter = matter(content);
 
+      // Skip files without frontmatter (using BlogPostLayout component instead)
+      if (!frontmatter.data.title) return;
+
       feed.item({
         title: frontmatter.data.title,
         url: "/blog/" + name.replace(/\.mdx?/, ""),
         date: frontmatter.data.date,
         description: frontmatter.data.description,
-        categories: frontmatter.data.tag.split(", "),
+        categories: frontmatter.data.tag ? frontmatter.data.tag.split(", ") : [],
         author: frontmatter.data.author,
       });
     }),
