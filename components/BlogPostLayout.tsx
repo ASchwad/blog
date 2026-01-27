@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 
 interface BlogPostLayoutProps {
@@ -21,6 +22,9 @@ export function BlogPostLayout({
 
   return (
     <>
+      <Head>
+        <title>{title}</title>
+      </Head>
       <article>
         <Link
           href="/blog"

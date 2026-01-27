@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -19,7 +20,16 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-12 sm:py-16">
-      <nav className="mb-12">
+      <nav className="mb-12 flex items-center gap-8">
+        <Link href="/">
+          <Image
+            src="/images/logo.png"
+            alt="Logo"
+            width={32}
+            height={32}
+            className=""
+          />
+        </Link>
         <ul className="flex gap-8">
           {navItems.map((item) => {
             const isActive =

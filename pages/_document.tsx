@@ -3,7 +3,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 export default function Document() {
   const meta = {
     title: "Alexander Schoenenwald",
-    description: "Software Engineer at Palantir. Excited about end-to-end feature design and implementation.",
+    description: "Generalist software engineer focused on solving data problems. Building products in the Applied AI space.",
     image: "https://avatars.githubusercontent.com/u/33654656?v=4",
   };
 
@@ -20,6 +20,7 @@ export default function Document() {
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
+        <link rel="icon" href="/images/logo.png" />
       </Head>
       <body>
         <Main />

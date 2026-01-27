@@ -83,7 +83,11 @@ img.next-image {
 }
 
 .prose a {
-  color: #0074de;
+  color: oklch(0.65 0.15 65);
+}
+
+.prose a:hover {
+  color: oklch(0.55 0.15 65);
 }
 
 .nav-line .nav-link {
@@ -281,8 +285,9 @@ img.next-image {
   padding: 0.125rem 0.625rem;
   font-size: 0.75rem;
   font-weight: 500;
-  background-color: var(--secondary);
-  color: var(--secondary-foreground);
+  background-color: oklch(0.25 0.08 65);
+  color: oklch(0.75 0.15 65);
+  border: 1px solid oklch(0.65 0.15 65 / 40%);
 }
 
 @layer base {
@@ -298,7 +303,7 @@ img.next-image {
 .prose {
   --tw-prose-body: var(--foreground);
   --tw-prose-headings: var(--foreground);
-  --tw-prose-links: oklch(0.7 0.15 250);
+  --tw-prose-links: oklch(0.65 0.15 65);
   --tw-prose-bold: var(--foreground);
   --tw-prose-counters: var(--muted-foreground);
   --tw-prose-bullets: var(--muted-foreground);
@@ -323,7 +328,25 @@ img.next-image {
 }
 
 .prose hr {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   border-color: var(--border);
+}
+
+/* Year headers on projects page */
+.prose h2 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted-foreground);
+  font-variation-settings: "wght" 600;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* Project titles */
+.prose h3 {
+  font-size: 1.25rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
 }
