@@ -18,9 +18,13 @@ The key pain point with DynamoDB is, that the queries are not as powerful as we 
 
 In our case, 5 minutes is the default resolution given by the hardware. However, this resolution is only rarely required. E.g. for rendering graphs with timeframes of weeks or even months, the resolution should be smaller to provide minimal response time.
 
+![Resolution aggregation example](/images/blog/dynamodb-to-timestream/resolution-aggregation.webp)
+
 ### How can it be done in DynamoDB
 
 We have to query the data from the API, aggregate it and transfer the result to the client.
+
+![DynamoDB API flow](/images/blog/dynamodb-to-timestream/dynamodb-api-flow.webp)
 
 **Pain points:**
 

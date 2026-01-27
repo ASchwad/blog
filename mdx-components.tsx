@@ -1,17 +1,12 @@
 import type { MDXComponents } from "mdx/types";
-import Image from "next/image";
 import Link from "next/link";
+import { BlogImage } from "./components/BlogImage";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    // Use Next.js Image for optimized images
+    // Use custom BlogImage for smart sizing and lightbox
     img: (props) => (
-      <Image
-        {...(props as any)}
-        width={800}
-        height={450}
-        className="next-image"
-      />
+      <BlogImage src={props.src || ""} alt={props.alt || ""} />
     ),
     // Use Next.js Link for internal links
     a: (props) => {

@@ -82,6 +82,74 @@ img.next-image {
   margin: 0;
 }
 
+/* Blog image wrapper */
+.blog-image-wrapper {
+  display: block;
+  margin: 1.5rem 0;
+  cursor: zoom-in;
+}
+
+.blog-image {
+  border-radius: 0.5rem;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Lightbox styles */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  cursor: zoom-out;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.lightbox-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.lightbox-content {
+  max-width: 95vw;
+  max-height: 95vh;
+  cursor: default;
+}
+
+.lightbox-image {
+  max-width: 95vw;
+  max-height: 95vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
 .prose a {
   color: oklch(0.65 0.15 65);
 }

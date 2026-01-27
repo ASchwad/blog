@@ -22,6 +22,8 @@ Language is set, now lets translate the strings respectively: Instead of writing
 
 Lastly, how do we define translations in i18n? We can provide them directly within the i18n initialization. To keep a better overview, we can also outsource the translations in a JSON file, import them in for the initialization and use it as value for the resources key.
 
+![i18n initialization code example](/images/blog/react-translation-workflow/i18n-init-code.jpeg)
+
 ## Shortcomings of JSON
 
 Unfortunately, while developing and maintaining your app, you have to go back and forth in optimizing and creating keys for your translations. Although we as developer speak many (programming) languages, we usually are assisted by colleagues or partners for the in-app translations. Our translation logic works via a JSON file, but we cannot use this file format to collaborate in a team as it is not very intuitive for others.
@@ -39,12 +41,7 @@ To do so, we decided to maintain the translations in an Excel sheet which is sha
 
 ### Example Excel sheet with 3 languages (English, German, French):
 
-```
-| key     | en      | de              | fr        |
-|---------|---------|-----------------|-----------|
-| welcome | Welcome | Willkommen      | Bienvenue |
-| goodbye | Goodbye | Auf Wiedersehen | Au revoir |
-```
+![Translation table with keys and languages](/images/blog/react-translation-workflow/translation-table.jpeg)
 
 - **Rows:** keys that are used in the code
 - **Columns:** language keys (en, de, fr)
@@ -71,6 +68,8 @@ To do so, we decided to maintain the translations in an Excel sheet which is sha
 To run the script, note that Python and packages like Pandas are required to be installed on your machine. Via the `.env` file, you can setup the Path to the excel file and the name of the generated translation JSON file. The script uses the env file, so you should place the `.env` file in the same directory as the `readFromExcel.py` script.
 
 And that's it! You can now add and edit further translations to the Showcase Project and also use this approach in any other app where the localization is based on a JSON file. We use the same excel file for the React Native and React.js Web App.
+
+![App demo showing translations in English, German, and French](/images/blog/react-translation-workflow/app-demo-languages.jpeg)
 
 **Github Repo:** [https://github.com/ASchwad/react-translation-workflows](https://github.com/ASchwad/react-translation-workflows)
 
