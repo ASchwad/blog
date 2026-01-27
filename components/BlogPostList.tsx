@@ -8,13 +8,39 @@ interface BlogPost {
   href: string;
 }
 
-const posts: BlogPost[] = [
+export const posts: BlogPost[] = [
   {
     title: "Claude Code: My Setup and Learnings",
     description: "A walkthrough of my Claude Code configuration and workflow",
     date: "2026/1/26",
     tags: ["AI", "tooling"],
     href: "/blog/claude-code-setup",
+  },
+  {
+    title: "From DynamoDB to Timestream",
+    description:
+      "Advantages of persisting our sensor data in Timestream over DynamoDB",
+    date: "2022/10/19",
+    tags: ["AWS", "Data", "Sensors"],
+    href: "/blog/dynamodb-to-timestream",
+  },
+  {
+    title:
+      "Collaborating on translations - from Excel to multi-language React (Native) app",
+    description:
+      "A workflow to coordinate translations with colleagues via Excel and integrate them into your React app",
+    date: "2021/12/30",
+    tags: ["React", "React Native", "i18n", "JavaScript"],
+    href: "/blog/react-translation-workflow",
+  },
+  {
+    title:
+      "Research @BMW - How to collect and visualize data lineage in an AWS-based data lake",
+    description:
+      "Enhancing transparency within complex data pipelines by collecting data lineage",
+    date: "2021/9/27",
+    tags: ["AWS", "Big Data", "Spark", "React"],
+    href: "/blog/data-lineage-aws",
   },
 ];
 
@@ -28,7 +54,11 @@ export function BlogPostList() {
             <div className="post-item">
               <h3>{post.title}</h3>
               <time dateTime={date.toISOString()}>
-                {date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                {date.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
               </time>
               <p className="post-description">{post.description}</p>
               <div className="post-tags">
@@ -45,6 +75,9 @@ export function BlogPostList() {
       <style jsx global>{`
         .blog-post-list {
           margin-top: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
         }
         .post-item-link {
           text-decoration: none;
@@ -53,7 +86,7 @@ export function BlogPostList() {
         }
         .post-item {
           position: relative;
-          padding: 1rem;
+          padding: 1.5rem;
           border-radius: 0.5rem;
           transition: background-color 0.15s ease;
           cursor: pointer;
@@ -69,15 +102,16 @@ export function BlogPostList() {
           font-size: 0.875rem;
           color: var(--muted-foreground);
           display: block;
-          margin-bottom: 1rem;
+          margin-bottom: 0.75rem;
         }
         .post-description {
-          margin: 0 0 1rem 0;
+          margin: 0 0 0.75rem 0;
           color: var(--muted-foreground);
         }
         .post-tags {
           display: flex;
           gap: 0.5rem;
+          flex-wrap: wrap;
         }
         .post-tag {
           display: inline-flex;
