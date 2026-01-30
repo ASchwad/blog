@@ -152,10 +152,12 @@ img.next-image {
 
 .prose a {
   color: oklch(0.65 0.15 65);
+  text-decoration: none;
 }
 
 .prose a:hover {
   color: oklch(0.55 0.15 65);
+  text-decoration: none;
 }
 
 .nav-line .nav-link {
