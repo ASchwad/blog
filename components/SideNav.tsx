@@ -7,6 +7,7 @@ export interface NavItem {
   name: string;
   id: string;
   href?: string; // Optional link for navigation to different pages
+  icon?: React.ReactNode; // Optional icon to display next to the name
 }
 
 interface SideNavProps {
@@ -105,6 +106,7 @@ export function SideNav({ items }: SideNavProps) {
                       href={item.href}
                       className={activeId === item.id ? "active" : ""}
                     >
+                      {item.icon && <span className="side-nav-icon">{item.icon}</span>}
                       {item.name}
                     </Link>
                   ) : (
@@ -113,6 +115,7 @@ export function SideNav({ items }: SideNavProps) {
                       onClick={(e) => handleAnchorClick(e, item)}
                       className={activeId === item.id ? "active" : ""}
                     >
+                      {item.icon && <span className="side-nav-icon">{item.icon}</span>}
                       {item.name}
                     </a>
                   )}
@@ -164,13 +167,21 @@ export function SideNav({ items }: SideNavProps) {
           transition: color 0.15s ease;
           display: block;
           padding: 0.125rem 0;
+          position: relative;
         }
         .side-nav a:hover {
-          color: var(--gray-800);
+          color: var(--gray-900);
+          text-decoration: underline;
+          text-underline-offset: 2px;
         }
         .side-nav a.active {
           color: var(--gray-900);
           font-weight: 500;
+        }
+        .side-nav-icon {
+          position: absolute;
+          left: -1rem;
+          top: 0.4rem;
         }
         @media (max-width: 1200px) {
           .side-nav {
