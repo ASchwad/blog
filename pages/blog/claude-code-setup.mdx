@@ -9,18 +9,23 @@ import { BlogPostLayout } from "../../components/BlogPostLayout";
 ## My CC Journey and Usage
 
 Coming from a traditional coding background, it is hard to let go of exact line by line control of the code.  
-However, **for me code was always just about having a working product which solves a problem. As long as the product meets the requirement, the exact implementation details are secondary.**
+However, **for me code was always just about having a working product which solves a problem. As long as the product meets the requirement, the exact implementation details are secondary.** With AI Coding (not just CC but also Codex, OpenCode, Cursor, ...) The bottleneck of software engineering is understanding markets / business requirements and validating the implementation against these requirements.
 
-So what am I even using Claude Code for at the moment? Classic Fullstack Development tasks:
+So what am I even using Claude Code for at the moment? Still classic Fullstack Development tasks:
 
 - Frontend features
 - Backend features
+- LLM Prompt tuning for AI-centered software
 - DevOps tasks (CI/CD, Infrastructure as Code)
 - Documentation (both for humans and Agents)
 - Debugging (checking logs)
 - Testing (unit tests, integration tests, e2e tests with Playwright)
 - One-off data analysis, processing and crawling
 - Project Management (writing and refining issues and PRs)
+
+Where am I **not** using Claude Code?
+
+- Only really in validating ideas and showing new features to customers. Still wondering how I could leverage it more here
 
 Until July 2025 I have been mostly using AI Coding Assistance via Cursor before switching to Claude Code.  
 Having it purely in the Terminal felt alien and not part of my regular workflow. The gamechanger was once I had it within VS Code via the Claude extension and by getting direct diffs in the editor. That made it much easier to verify and understand the changes.
@@ -73,6 +78,21 @@ The last one is important. This is essentially giving Claude the skill to find i
 Also, I state in the CLAUDE.md that we change any tech details, we need to update the respective markdown files around it too. Trying to keep these in sync is important.
 
 ## Subagents: UI-Validator + Playwright MCP
+
+One of my favourite Claude hacks: Provide Playwright acccess to Claude Code and let it visually check its own work!
+When planning, think of the optimal state and acceptance criteria. Once the implementation is done, you can let check CC check the implementation visually against these requirements.
+
+So to install the MCP for Playwright, run in your project directory:
+
+```bash
+claude mcp add playwright npx '@playwright/mcp@latest'
+```
+
+Additionally, I wrap this with a UI-Validator agent definition outlining the exact steps and guidelines for visual verification. The advantage about using a subagent is that we can have a separate config (vs. the one for the general session) for:
+
+- tools: You can specify exactly which tools you allow the subagent to use (`mcp**playwright**browser_navigate, mcp**playwright**browser_snapshot, mcp**playwright**browser_take_screenshot, mcp**playwright**browser_click, mcp**playwright**browser_resize, mcp**playwright**browser_hover, mcp**playwright**browser_close, Read, Glob`)
+- the model: currently I use Sonnet
+- permissionMode: I set this to `bypassPermissions` so that the agent can directly access the localhost without asking for approval every time. It opens a debug chrome without my cookies and other session details. Therefore I accept the risk
 
 ## Classic Dev Practices (lint, format, ...) help Claude Code too!
 
@@ -177,7 +197,7 @@ I am using [ClaudeBar](claudebar.png), nice overview of current sessions and wee
 
 ## Further Reading
 
-There is a lot of noise in the AI Coding field. My favorite sources around this (and more) are Boris Cherny and Simon Willison.
+There is a lot of noise in the AI Coding field. My favorite sources around this (and more) are (Boris Cherny)[https://x.com/bcherny] and (Simon Willison)[https://simonwillison.net/].
 
 </BlogPostLayout>
 ````
