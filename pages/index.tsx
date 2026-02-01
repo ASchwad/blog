@@ -34,11 +34,13 @@ export default function Home() {
         </h1>
         <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
           Hey! Thanks for stopping by! 👋
-          <br /><br />
+          <br />
+          <br />
           I'm a generalist software engineer focused on solving data problems.
-          For 8+ years, I've been building solutions end-to-end—from customer
+          For 8+ years, I've been building solutions end-to-end: from customer
           conversations to data pipelines, backends, and frontends.
-          <br /><br />
+          <br />
+          <br />
           Currently I'm freelancing in the Applied AI space.
         </p>
 
