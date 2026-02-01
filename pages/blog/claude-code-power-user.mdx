@@ -7,15 +7,9 @@ import { CodeTabs } from "../../components/CodeTabs";
   tags={["AI", "tooling"]}
 >
 
-## General notes and observations
+## Introduction
 
-- Plan Mode is strong for complex changes and aligning expectations. Claude often correctly identifies architectural decisions and provides a handy list of the options.
-- Use CC to commit and commit often. This is additional context for you **and** Claude. Especially when debugging, the commit history with good messages is a important data point.
-- Let Claude use the CLI commands of your tools. e.g. the GH CLI for checking out issues and PRs works really well. IMO CLIs > MCP
-- I didnt try Claude Cowork excessively. Currently I think it's good for one-off tasks which require desktop access. Letting it search for an invoice in my inbox or setting up email filter rules worked, but was not seamless.
-  For repeatable tasks, I'd prefer having scripts and reliable automation instead. That's cheaper and faster.
-  With that said, I think Claude Code is similarly capable in non-coding tasks. I recently wrote a whole business plan with financial planning for a government grant application using Claude Code in VS Code. It worked really well using Markdown files and in the end creating PDF and Excel files. Software Engineering tooling like git and markdown is also perfect for this.
-- I think the bigger a codebase gets, the more context Claude will need to gather to understand logical dependencies. We also build increasingly more abstractions and tests. This overall leads to more inference time and requires more tokens as for smaller codebases. So I think for larger codebases, the session limits will be hit more often.
+???
 
 ## Subagents: UI-Validator + Playwright MCP
 
@@ -112,7 +106,7 @@ For projects where I have multiple clones, I specify a port in the environment v
 ...
 ```
 
-In ClAUDE.md:
+In `ClAUDE.md`:
 
 ```markdown
 ## Development Server
@@ -124,12 +118,6 @@ In ClAUDE.md:
 - For multiple instances (different directories), set different `DEV_PORT` in each `.env.local`
 - **UI Validator agent**: Use `http://localhost:$DEV_PORT` (check `DEV_PORT` in `.env.local`, default 3000)
 ```
-
-### ClaudeBar for tracking sessions
-
-I am using [ClaudeBar](https://github.com/nicobrenner/claudebar) for a nice overview of current sessions and weekly limit. It also shows a quick indicator in the menu bar.
-
-![ClaudeBar showing session overview](/images/blog/claude-code-power-user/claudebar.png)
 
 ## Further Reading
 

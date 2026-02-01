@@ -6,60 +6,131 @@ import { BlogPostLayout } from "../../components/BlogPostLayout";
   tags={["AI", "tooling"]}
 >
 
-## My CC Journey and Usage
+## My Journey to Claude Code
 
-Coming from a traditional coding background, it is hard to let go of exact line by line control of the code.
-However, **for me code was always just about having a working product which solves a problem. As long as the product meets the requirement, the exact implementation details are secondary.** With AI Coding (not just CC but also Codex, OpenCode, Cursor, ...) The bottleneck of software engineering is understanding markets / business requirements and validating the implementation against these requirements.
+Coming from a traditional coding background, letting go of line-by-line control felt (and still feels) weird. But in the bigger picture, code has always been a means to an end—a working product that solves a problem for me. The exact implementation details are secondary.
 
-So what am I using Claude Code for at the moment? Still classic Fullstack Development tasks:
+With AI coding tools (Claude Code, Cursor, Codex, and others), the bottleneck of software engineering has shifted: it's now about understanding business requirements and validating implementations against them. Code is cheap now.
 
-- Frontend features
-- Backend features
+**What I use Claude Code for:**
+
+- Full Stack Engineering: Frontend, Backend, Testing, Debugging, Database design
 - LLM Prompt tuning for AI-centered software
 - DevOps tasks (CI/CD, Infrastructure as Code)
 - Documentation (both for humans and Agents)
-- Debugging (checking logs)
-- Testing (unit tests, integration tests, e2e tests with Playwright)
 - One-off data analysis, processing and crawling
 - Project Management (writing and refining issues and PRs)
 
-Where am I **not** using Claude Code? Only really in validating ideas and showing new features to customers. Still wondering how I could leverage it more here
+**Where I'm not using it yet:**
 
-Until July 2025 I have been mostly using AI Coding Assistance via Cursor before switching to Claude Code.
-Having it purely in the Terminal felt alien and not part of my regular workflow. The gamechanger was once I had it within VS Code via the Claude extension and by getting direct diffs in the editor. That made it much easier to verify and understand the changes.
+- Business Strategy
+- Communication with my team and stakeholders
+- Communicating and presenting new features to end users (I should do this...)
+
+## From Cursor to Claude Code
+
+Until July 2025, I used Cursor as my primary AI coding assistant. Claude Code in the terminal felt alien at first. Quite disconnected from my workflow.
+
+Thankfully the VS Code extension exists though! Having Claude Code integrated into my editor with sleek diffs made it much easier to verify and understand changes. That was the tipping point for me to switch over.
 
 ![My token consumption over time](/images/blog/claude-code-setup/image.png)
 
-## Boilerplates > Starting from Scratch
+## VS Code Extension vs. Terminal
 
-IMO Claude Code is not great at bootstrapping projects from scratch. Depending on the goal of the project, I either use the next.js init or my own vite boilerplate.
-This way I have my standard stack (React, useQuery, shadcn, tailwind, typescript, eslint etc.) set up correctly and Claude doesnt have to guess and waste tokens to figure out how to configure these things. Mainstream and modern libraries have the most surface area in the training of the model, so Claude will be more familiar with them and yield better results.
+I'm using the VS Code extension for Claude Code 95% of the time.
 
-## What should be in your CLAUDE.md?
+Good:
 
-Foremost: Document whatever you find yourself explaining and repeating to the model.
+- Better image copy-pasting and preview
+- Handy button to start a new session
+- Better diff view
+- Better session history access
 
-Good candidates for this are:
+Bad:
 
-- What the software is about, what's the business domain and bigger picture we want to achieve
-- How to start the dev server
-- How to build and test UI features
-- Naming conventions
-- Further documentation
+- No direct access to memory functionality (via `#`)
+- Just a hunch, but I think the extension has crashed VS Code 3-4 times so far
 
-The last one is important. This is essentially giving Claude the skill to find in-depth information for specific topics. I typically have in-depth documentation both for humans and Agents in Markdown files in the code base. I reference them with a short summary in CLAUDE.md so Claude knows where to look for more information.
+## ClaudeBar for Tracking Sessions
 
-Also, I state in the CLAUDE.md that we change any tech details, we need to update the respective markdown files around it too. Trying to keep these in sync is important.
+I'm using [ClaudeBar](https://github.com/nicobrenner/claudebar) for a nice overview of current sessions and the weekly limit. It also shows a quick indicator in the menu bar.
 
-## Classic Dev Practices (lint, format, ...) help Claude Code too!
+![ClaudeBar showing session overview](/images/blog/claude-code-power-user/claudebar.png)
 
-I have prettier and ESLint set up on all my projects. In some projects also unit tests.
-With husky pre-commit hooks, we can ensure that new generated code from Claude is checked for our standards. In case of issues, Claude can directly fix the code before committing.
+## Good Plans save Time
 
-These rules can be quite custom like having at maximum 1.000 lines of code within one file. Having these checked deterministically is great as it will force Claude to adhere. This wouldnt be the case for writing it to CLAUDE.md.
+Claude Code has a planning mode (toggle with SHIFT+TAB) to collect context, ask questions, and create a detailed step-by-step plan to implement the feature. If the plan is incomplete, features might be implemented incomplete and you will find yourself iterating with the model via multiple follow up edits. Better invest a few minutes more time upfront and reach the highest satisfaction, when Claude can get it done on a single prompt.  
+❗️ Invest your time here, it pays off. This is the single biggest influence on how well Claude Code is going to perform for your problems.
+
+## Committing Prevents Headaches
+
+Use CC to commit and commit often. Claude will make mistakes and you will find yourself wanting to revert some of the changes.
+Reverting is always easier if you don't mix up logic. So committing is key.
+
+Additionally, this is extra context for you **and** Claude. The commit history with good messages makes browsing recent changes easier and comes in handy when debugging.
+
+## CLIs for Tool Interaction
+
+- Let Claude use the CLI commands of your tools. E.g. the GH CLI for checking out issues and PRs works really well. Claude might try to call the APIs via curl and managing auth is annoying for that. So I have a note about this in my `CLAUDE.md`.
+
+## Claude Cowork?
+
+- Currently I think it's good for one-off tasks which require desktop access. Letting it search for an invoice in my inbox or setting up email filter rules worked, but still required some intervention.
+- For repeatable tasks, I'd prefer having scripts and reliable automation instead. That's cheaper and faster.
+- With that said, I think Claude Code is similarly capable in non-coding tasks. I recently wrote a whole business plan with financial planning for a grant application using Claude Code in VS Code. It worked really well using Markdown files and in the end creating PDF and Excel files. Software Engineering tooling like git and markdown is also perfect for this.
+
+## Start with Boilerplates, Not from Scratch
+
+Claude Code isn't great at bootstrapping projects from zero. Instead, I start with either `create-next-app` or my own [Vite boilerplate](https://github.com/ASchwad/react-vite-shadcn-boilerplate) depending on the project.
+
+This gives me three advantages:
+
+1. **My standard stack** (React, useQuery, shadcn, Tailwind, TypeScript, ESLint, ...) is configured correctly from the start
+2. **Claude doesn't waste tokens** figuring out how to wire up tooling
+3. **I don't waste my time** with Claude messing it up. Been there...
+
+Mainstream and modern libraries also have more surface area in Claude's training data. So it produces better results with them (kind of leading to a vicious cycle of everyone using the same tools over time).
+
+## What Should Be in Your CLAUDE.md?
+
+First: What is it? It's a text file that is prefixed to every Claude Code conversation.
+
+**The core principle:** Document whatever you find yourself explaining repeatedly to the model.
+
+Good candidates:
+
+- **Business context** — What the software does, the domain, the bigger picture
+- **Dev commands** — How to start the server, run tests, build
+- **Conventions** — Naming patterns, file structure, preferred libraries
+- **Pointers to deeper docs** — This is key (see below)
+
+But also bear in mind: Context rot is real. Keep the things that are relevant for most tasks in this CLAUDE.md.
+
+## Link to In-Depth Documentation
+
+I keep detailed documentation in Markdown files throughout my codebase and you can think of it like an internal knowledge base. This is helpful both for humans and for Claude. In `CLAUDE.md`, I reference these with short summaries so Claude knows where to look:
+
+```markdown
+## Documentation
+
+- See `docs/api.md` for API endpoint conventions
+- See `docs/testing.md` for test patterns and fixtures
+- When changing technical details, update the relevant docs
+```
+
+This gives Claude the ability to self-serve detailed information without bloating your `CLAUDE.md`.
+
+## Classic Dev Practices Help Claude Too
+
+I run Prettier and ESLint on all my projects, with unit tests on most. Combined with Husky pre-commit hooks, this creates a feedback loop: Claude generates code, the hooks catch issues, and Claude fixes them before committing.
+
+**Deterministic checks beat written instructions.** You can tell Claude "keep files under 1000 lines" in `CLAUDE.md`, but a linter rule that enforces it will actually make Claude comply. Codify your standards wherever possible.
 
 ## Further Reading
 
-There is a lot of noise in the AI Coding field. My favorite sources around this (and more) are [Boris Cherny](https://x.com/bcherny) and [Simon Willison](https://simonwillison.net/).
+The AI coding space is noisy. Two voices I find consistently valuable:
+
+- **[Boris Cherny](https://x.com/bcherny)** — Lead Dev on Claude Code
+- **[Simon Willison](https://simonwillison.net/)** - Shares great LLM and engineering insights
 
 </BlogPostLayout>
