@@ -1,5 +1,6 @@
-import Image from "next/image";
 import { ProjectNav } from "../components/ProjectNav";
+import { ImageTriptych } from "../components/ImageTriptych";
+import { BlogImage } from "../components/BlogImage";
 
 # Projects
 
@@ -12,14 +13,9 @@ A selection of professional and toy projects I've worked on over the years.
 ## 2026
 
 <h3 id="finale-ligure-trail-map">Finale Ligure Trail Map</h3>
+<span className="blog-tag">Toy Project</span>
 
-<Image
-  src="/images/projects/fl-trails.png"
-  alt="Finale Ligure Trail Map"
-  width={800}
-  height={450}
-  className="next-image"
-/>
+<BlogImage src="/images/projects/fl-trails.png" alt="Finale Ligure Trail Map" />
 
 A Next.js app for exploring mountain biking trails in Finale Ligure, Italy with real-time open/closed status. Built with Leaflet for interactive maps, Supabase for trail data and status updates, and React Query for data fetching. Features filtering by area, difficulty (Singletrail scale), and trail status.
 
@@ -32,41 +28,36 @@ A Next.js app for exploring mountain biking trails in Finale Ligure, Italy with 
 
 <h3 id="futuro-farming">Futuro Farming</h3>
 
-<Image
-  src="/images/projects/ff.png"
-  alt="Futuro Farming"
-  width={800}
-  height={450}
-  className="next-image"
+<ImageTriptych
+  images={[
+    { src: "/images/projects/ff/app.png", alt: "Futuro Farming Mobile App" },
+    {
+      src: "/images/projects/ff/flash-station.gif",
+      alt: "Flash Station - Sensor flashing software",
+    },
+    {
+      src: "/images/projects/ff/workflow.png",
+      alt: "Futuro Farming - Calf Monitoring Workflow",
+    },
+  ]}
 />
 
-Helping farmers predict and prevent diseases in their livestock herds. We developed hardware/software/machine learning models and scaled it across 300+ farms in 20+ countries.
+Helping farmers predict and prevent diseases in their livestock herds. We developed hardware, software, and machine learning models, scaling across 300+ farms in 20+ countries.
+
+By founding and working on Futuro Farming over 4 years, I've learned what it means to **build**. Working on a complex product from the greenfield without any guidance and 100% ownership of the technical decisions around our software. Earning only the minimum to live and without a rewarding exit. But it was the most formative time of my career and I would do it again. During my time there I have worked on the following:
+
+**Manufacturing & Assembly Tools:** Built software for sensor flashing, RF quality check protocols embedded in a mobile app for the assembly plant and interfaces with laser systems for housing labels.
+
+**Cloud Infrastructure:** Owned our AWS stack including APIs, databases, data pipelines and machine learning services.
+
+**Frontend Applications:** Led development of a B2B mobile app serving 300+ users across 20 languages, plus an internal admin dashboard for KPI tracking, customer support and UX validation.
 
 - [Customer Testimonial](https://www.youtube.com/watch?v=np5L43nntZU)
 
-<h3 id="spotify-playlist-analyzer">Spotify Playlist Analyzer</h3>
-
-<Image
-  src="/images/projects/spotify-analyzer.jpeg"
-  alt="Spotify Playlist Analyzer"
-  width={800}
-  height={450}
-  className="next-image"
-/>
-
-A React app that uses the Spotify API to analyze your playlists. Features audio feature analysis with pie chart visualizations, genre tagging, and playlist insights. Built with React, TypeScript, and Tailwind CSS.
-
-- [GitHub](https://github.com/ASchwad/spotify-react-app)
-
 <h3 id="solarkraft">Solarkraft</h3>
+<span className="blog-tag">Toy Project</span>
 
-<Image
-  src="/images/projects/solarkraft.jpeg"
-  alt="Solarkraft"
-  width={800}
-  height={450}
-  className="next-image"
-/>
+<BlogImage src="/images/projects/solarkraft.jpeg" alt="Solarkraft" />
 
 A React app that calculates solar metrics for German cities using the Marktstammdatenregister API from the German Bundesnetzagentur. Uses a Cloudflare Worker as a CORS proxy to handle browser same-origin policy restrictions.
 
@@ -74,14 +65,9 @@ A React app that calculates solar metrics for German cities using the Marktstamm
 - [Live App](https://aschwad.github.io/solarkraft/)
 
 <h3 id="route-builder">Route Builder</h3>
+<span className="blog-tag">Toy Project</span>
 
-<Image
-  src="/images/projects/route-builder.gif"
-  alt="Route Builder"
-  width={800}
-  height={450}
-  className="next-image"
-/>
+<BlogImage src="/images/projects/route-builder.gif" alt="Route Builder" />
 
 A React/TypeScript app using Leaflet for planning cross-country running routes. Features drag-and-drop waypoints both in the map and controls panel, distance calculation, and GPX file export. Uses Geoapify for map tiles.
 
@@ -94,28 +80,18 @@ A React/TypeScript app using Leaflet for planning cross-country running routes. 
 
 <h3 id="data-lineage">Data Lineage at BMW Group</h3>
 
-<Image
-  src="/images/projects/lineage.png"
-  alt="Data Lineage at BMW Group"
-  width={800}
-  height={450}
-  className="next-image"
-/>
+<BlogImage src="/images/projects/lineage.png" alt="Data Lineage at BMW Group" />
 
 Research on how to make data transformations trackable and intuitive in a petabyte scale data catalog. Enabling automated data lineage collection and analysis of Spark Pipelines.
 
 - [Blog Post](/blog/data-lineage-aws)
-- [Academic Paper (Springer)](https://link.springer.com/chapter/10.1007/978-3-030-86472-9_14)
+- [Academic Paper (Springer)](https://link.springer.com/article/10.1007/s13222-021-00387-7) — >10k reads
+- [LWDA 2021 Presentation](https://www.youtube.com/watch?v=Blqn5R2qGMU)
 
 <h3 id="react-native-translation-tooling">React Native Translation Tooling</h3>
+<span className="blog-tag">Toy Project</span>
 
-<Image
-  src="/images/projects/translations.png"
-  alt="React Native Translation Tooling"
-  width={800}
-  height={450}
-  className="next-image"
-/>
+<BlogImage src="/images/projects/translations.png" alt="React Native Translation Tooling" />
 
 A workflow that converts Excel spreadsheets to JSON translation files using a Python script. Integrates with react-i18n for automatic device language detection and fallback handling.
 
@@ -127,14 +103,9 @@ A workflow that converts Excel spreadsheets to JSON translation files using a Py
 ### 2019
 
 <h3 id="grand-theft-candy">Grand Theft Candy</h3>
+<span className="blog-tag">Toy Project</span>
 
-<Image
-  src="/images/projects/gtc.gif"
-  alt="Grand Theft Candy"
-  width={800}
-  height={450}
-  className="next-image"
-/>
+<BlogImage src="/images/projects/gtc.gif" alt="Grand Theft Candy" />
 
 An AR iOS game built with Swift and ARKit where players collect candy and escape the police. Features multiple collectible items with different effects, 4 police movement patterns that increase in difficulty, and Firebase-powered highscores. Built as a university assignment at LMU Munich.
 

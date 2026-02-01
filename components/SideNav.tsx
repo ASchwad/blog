@@ -8,6 +8,7 @@ export interface NavItem {
   id: string;
   href?: string; // Optional link for navigation to different pages
   icon?: React.ReactNode; // Optional icon to display next to the name
+  tag?: string; // Optional tag to display after the name
 }
 
 interface SideNavProps {
@@ -108,6 +109,7 @@ export function SideNav({ items }: SideNavProps) {
                     >
                       {item.icon && <span className="side-nav-icon">{item.icon}</span>}
                       {item.name}
+                      {item.tag && <span className="side-nav-tag">{item.tag}</span>}
                     </Link>
                   ) : (
                     <a
@@ -117,6 +119,7 @@ export function SideNav({ items }: SideNavProps) {
                     >
                       {item.icon && <span className="side-nav-icon">{item.icon}</span>}
                       {item.name}
+                      {item.tag && <span className="side-nav-tag">{item.tag}</span>}
                     </a>
                   )}
                 </li>
@@ -182,6 +185,19 @@ export function SideNav({ items }: SideNavProps) {
           position: absolute;
           left: -1rem;
           top: 0.4rem;
+        }
+        .side-nav-tag {
+          display: inline-block;
+          margin-left: 0.375rem;
+          padding: 0.0625rem 0.375rem;
+          font-size: 0.625rem;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.025em;
+          background: var(--secondary);
+          color: var(--muted-foreground);
+          border-radius: 0.25rem;
+          vertical-align: middle;
         }
         @media (max-width: 1200px) {
           .side-nav {
