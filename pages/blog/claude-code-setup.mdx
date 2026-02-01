@@ -8,34 +8,115 @@ import { BlogPostLayout } from "../../components/BlogPostLayout";
 
 ## My CC Journey and Usage
 
-Until July 2025 I have been mostly using AI Coding Assistance via Cursor before switching to Claude Code.
-Initially I wasnt convinced on having it entirely in the Terminal - it was a separate process from my regular workflow and I had to decide when to use it vs. doing the change directly myself. This separation was gone though when I stared using it in VS Code along with the Claude extension. Getting direct diffs in the editor made it much easier to verify and understand the changes. My usage has grown steadily: July-September just a Pro Plan, October-December with a Max Plan with almost never exceeding session limits but now since January I run into them more and also trigger the weekly limits. Probably moving soon to the bigger Max Plan.
+Coming from a traditional coding background, it is hard to let go of exact line by line control of the code.  
+However, **for me code was always just about having a working product which solves a problem. As long as the product meets the requirement, the exact implementation details are secondary.**
 
-## Using tmux sessions
-
-## Using hooks
-
-## Setup settings.json
-
-## Setup CLAUDE.md
-
-## Subagents: UI-Validator
-
-## MCP: Playwright
-
-## ClaudeBar for tracking sessions
-
-## Classic Practices (lint, format, ...) help Claude Code too!
-
-## Central markdown docs
+Until July 2025 I have been mostly using AI Coding Assistance via Cursor before switching to Claude Code.  
+Having it purely in the Terminal felt alien and not part of my regular workflow. The gamechanger was once I had it within VS Code via the Claude extension and by getting direct diffs in the editor. That made it much easier to verify and understand the changes.
 
 ## General notes and observations
 
 - Plan Mode is strong for complex changes and aligning expectations. Claude often correctly identifies architectural decisions and provides a handy list of the options.
 - Commit often. This is additional context for you **and** Claude. Especially when debugging, the commit history with good messages is a important data point. I also use Claude to write commit messages.
 - Let Claude use the CLI commands of your tools. e.g. the local Supabase CLI for database migrations works really well. IMO CLIs > MCP
-- I didnt try Claude Cowork yet. Currently I think it's good for one-off tasks which require desktop access. For repeatable tasks, I'd prefer having scripts and reliable automation instead. That's cheaper and faster.
+- I didnt try Claude Cowork excessively. Currently I think it's good for one-off tasks which require desktop access. Letting it search for an invoice in my inbox or setting up email filter rules worked, but was not seamless.  
+  For repeatable tasks, I'd prefer having scripts and reliable automation instead. That's cheaper and faster.
   With that said, I think Claude Code is similarly capable in non-coding tasks. I recently wrote a whole business plan with financial planning for a government grant application using Claude Code in VS Code. It worked really well using Markdown files and in the end creating PDF and Excel files. Software Engineering tooling like git and markdown is also perfect for this.
 - I think the bigger a codebase gets, the more context Claude will need to gather to understand logical dependencies. We also build increasingly more abstractions and tests. This overall leads to more inference time and requires more tokens as for smaller codebases. So I think for larger codebases, the session limits will be hit more often.
+
+## Claude Code Extension vs. CLI
+
+I am using the VS Code extension exclusively.
+
+Good:
+
+- better image copy-pasting and image preview
+- Handy button to start a new session
+- better diffs view
+- better session history access
+
+Bad:
+
+- No direct access to memory functionality (via `#`)
+- Just a hunch, but I think the extension crashed the VS Code UI 3-4 times so far
+
+## Boilerplates > Starting from Scratch
+
+IMO Claude Code is not great at bootstrapping projects from scratch. Depending on the goal of the project, I either use the next.js init or my own vite boilerplate.
+This way I always have shadcn, tailwind, typescript, eslint etc. set up correctly and Claude doesnt have to guess and waste tokens to figure out how to configure these things. Mainstream and modern libraries have the most surface area in the training of the model, so Claude will be more familiar with them.
+
+## Setup CLAUDE.md
+
+### Central markdown docs
+
+## Subagents: UI-Validator + Playwright MCP
+
+## Classic Dev Practices (lint, format, ...) help Claude Code too!
+
+I have prettier and ESLint set up on all my projects. In some projects also unit tests.
+With husky pre-commit hooks, we can ensure that new generated code from Claude is checked for our standards. In case of issues, Claude can directly fix the code before committing.
+
+These rules can be quite custom like having at maximum 1.000 lines of code within one file. Having these checked deterministically is great as it will force Claude to adhere. This wouldnt be the case for writing it to CLAUDE.md.
+
+## Skills
+
+Skills are a simple way to extend Claude Code with specific task definitions and handy quick access via the slash `/` selector.
+
+- `/commit`: Commit changes with good messages
+- `/review`: Review code changes and report issues
+
+## Minor tweaks
+
+### Using hooks
+
+Claude Code has extensive support for custom hooks to interact with the Claude Code lifecycle.
+
+The only hook I am actively using is a notification hook on `Stop`. It plays a completion sound once the prompt is done.
+
+<CodeTabs tabs={["completion-sound.sh", "settings.json"]}>
+```sh
+#!/bin/bash
+
+# Claude Code completion sound hook
+
+# Plays a sound when Claude finishes a task
+
+SOUND_FILE="/Users/YOUR_NAME/.claude/sounds/sound.m4a"
+
+# Check if sound file exists
+
+if [[-f "$SOUND_FILE"]]; then # Use afplay (macOS) to play the sound file
+afplay "$SOUND_FILE" &
+else
+echo "Sound file not found: $SOUND_FILE" >&2
+fi
+
+````
+
+```json
+"hooks": {
+  "Stop": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "/Users/YOUR_NAME/.claude/hooks/completion-sound.sh"
+        }
+      ]
+    }
+  ]
+}
+````
+
+</CodeTabs>
+
+### Using tmux sessions
+
+### ClaudeBar for tracking sessions
+
+## Further Reading
+
+There is a lot of noise in the AI Coding field. My favorite sources around this (and more) are Boris Cherny and Simon Willison.
 
 </BlogPostLayout>
