@@ -1,0 +1,139 @@
+import { BlogPostLayout } from "../../components/BlogPostLayout";
+import { CodeTabs } from "../../components/CodeTabs";
+
+<BlogPostLayout
+  title="Claude Code Power User Tips"
+  date="2026/1/26"
+  tags={["AI", "tooling"]}
+>
+
+## General notes and observations
+
+- Plan Mode is strong for complex changes and aligning expectations. Claude often correctly identifies architectural decisions and provides a handy list of the options.
+- Use CC to commit and commit often. This is additional context for you **and** Claude. Especially when debugging, the commit history with good messages is a important data point.
+- Let Claude use the CLI commands of your tools. e.g. the GH CLI for checking out issues and PRs works really well. IMO CLIs > MCP
+- I didnt try Claude Cowork excessively. Currently I think it's good for one-off tasks which require desktop access. Letting it search for an invoice in my inbox or setting up email filter rules worked, but was not seamless.
+  For repeatable tasks, I'd prefer having scripts and reliable automation instead. That's cheaper and faster.
+  With that said, I think Claude Code is similarly capable in non-coding tasks. I recently wrote a whole business plan with financial planning for a government grant application using Claude Code in VS Code. It worked really well using Markdown files and in the end creating PDF and Excel files. Software Engineering tooling like git and markdown is also perfect for this.
+- I think the bigger a codebase gets, the more context Claude will need to gather to understand logical dependencies. We also build increasingly more abstractions and tests. This overall leads to more inference time and requires more tokens as for smaller codebases. So I think for larger codebases, the session limits will be hit more often.
+
+## Subagents: UI-Validator + Playwright MCP
+
+One of my favourite Claude hacks: Provide Playwright acccess to Claude Code and let it visually check its own work!
+When planning, think of the optimal state and acceptance criteria. Once the implementation is done, you can let check CC check the implementation visually against these requirements.
+
+So to install the MCP for Playwright, run in your project directory:
+
+```bash
+claude mcp add playwright npx '@playwright/mcp@latest'
+```
+
+Additionally, I wrap this with a UI-Validator agent definition outlining the exact steps and guidelines for visual verification. The advantage about using a subagent is that we can have a separate config (vs. the one for the general session) for:
+
+- tools: You can specify exactly which tools you allow the subagent to use (`mcp__playwright__browser_navigate, mcp__playwright__browser_snapshot, mcp__playwright__browser_take_screenshot, mcp__playwright__browser_click, mcp__playwright__browser_resize, mcp__playwright__browser_hover, mcp__playwright__browser_close, Read, Glob`)
+- the model: currently I use Sonnet
+- permissionMode: I set this to `bypassPermissions` so that the agent can directly access the localhost without asking for approval every time. It opens a debug chrome without my cookies and other session details. Therefore I accept the risk
+
+## Skills
+
+Skills are a simple way to extend Claude Code with specific task definitions and handy quick access via the slash `/` selector.
+
+- `/handoff`: Summarize current Claude Session, start a new one and paste summary as context into the new session
+- `/commit`: Commit changes (with pre-commit checks, groups changes logically, commits in logical groups with message convention)
+- `/review`: Review and highlight code changes in feature branch vs. current dev branch
+
+## Workflow Tweaks
+
+### Using hooks
+
+Claude Code has extensive support for custom hooks to interact with the Claude Code lifecycle.
+
+The only hook I am actively using is a notification hook on `Stop`. It plays a completion sound once the prompt is done.
+
+<CodeTabs tabs={["completion-sound.sh", "settings.json"]}>
+```sh
+#!/bin/bash
+
+# Claude Code completion sound hook
+
+# Plays a sound when Claude finishes a task
+
+SOUND_FILE="/Users/YOUR_NAME/.claude/sounds/sound.m4a"
+
+# Check if sound file exists
+
+if [[-f "$SOUND_FILE"]]; then # Use afplay (macOS) to play the sound file
+afplay "$SOUND_FILE" &
+else
+echo "Sound file not found: $SOUND_FILE" >&2
+fi
+
+````
+
+```json
+"hooks": {
+  "Stop": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "/Users/YOUR_NAME/.claude/hooks/completion-sound.sh"
+        }
+      ]
+    }
+  ]
+}
+```
+
+</CodeTabs>
+
+### Extra Repo Clones for parallel prompting
+
+When working on multiple features in parallel, I usually create extra clones of the repository. You might find yourself working in multiple CC sessions in the same repo and this works ok as long as the changes are not overlapping. But this can get tricky fast.
+
+I usually work on one bigger features requiring planning and longer edits at a time. In the other directory (i.e. separate branch), I do a couple smaller features. By keeping separate clones, I avoid confusion and overlapping changes.
+
+(you can achieve the same effect by using git worktrees)
+
+### Using tmux sessions
+
+Claude will try to run the dev server too. It can be annoying having Claude run it, as it is hidden as a background process. I am also working in various sessions and this will lead to lost context within the logs if not all sessions can easily access the localhost for the API and Frontend logs.
+
+I've recently started using tmux sessions to start the dev server in a dedicated terminal window. This way I can always see the logs and interact with the server if needed. In the CLAUDE.md, I specify that the dev server is running in a tmux session and that Claude can access it for local debugging and validation.
+
+For projects where I have multiple clones, I specify a port in the environment variables to let Claude know which localhost to use for starting the server and attaching the tmux session.
+
+```package.json
+...
+"scripts": {
+    "dev:tmux": "PORT=$(grep -s '^DEV_PORT=' .env.local | cut -d= -f2 || echo 3000); PORT=${PORT:-3000} && SESSION=blog-$PORT && (tmux has-session -t $SESSION 2>/dev/null && echo \"Attaching to existing session $SESSION\" && tmux attach -t $SESSION) || (echo \"Starting new session $SESSION on port $PORT\" && tmux new-session -d -s $SESSION -n 'Blog Dev' \"PORT=$PORT NEXT_PUBLIC_SITE_URL=http://localhost:$PORT yarn dev\" && tmux attach -t $SESSION)",
+  }
+...
+```
+
+In ClAUDE.md:
+
+```markdown
+## Development Server
+- Start dev server: `yarn dev:tmux` (creates/attaches to tmux session)
+- Port is configured via `DEV_PORT` env variable (default: 3000)
+- Session name: `blog-{PORT}` (e.g., `blog-3000`)
+- To check dev server output: `tmux capture-pane -t blog-$DEV_PORT -p -S -50`
+- To attach to the session: `tmux attach -t blog-$DEV_PORT`
+- For multiple instances (different directories), set different `DEV_PORT` in each `.env.local`
+- **UI Validator agent**: Use `http://localhost:$DEV_PORT` (check `DEV_PORT` in `.env.local`, default 3000)
+```
+
+### ClaudeBar for tracking sessions
+
+I am using [ClaudeBar](https://github.com/nicobrenner/claudebar) for a nice overview of current sessions and weekly limit. It also shows a quick indicator in the menu bar.
+
+![ClaudeBar showing session overview](/images/blog/claude-code-power-user/claudebar.png)
+
+## Further Reading
+
+There is a lot of noise in the AI Coding field. My favorite sources around this (and more) are [Boris Cherny](https://x.com/bcherny) and [Simon Willison](https://simonwillison.net/).
+
+</BlogPostLayout>
+````
