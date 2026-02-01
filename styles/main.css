@@ -87,7 +87,7 @@ img.next-image,
 /* Blog image wrapper */
 .blog-image-wrapper {
   display: block;
-  margin: 1.5rem 0;
+  margin: 0.75rem 0 1.5rem 0;
   cursor: zoom-in;
 }
 
@@ -362,6 +362,24 @@ img.next-image,
   border: 1px solid oklch(0.65 0.15 65 / 40%);
 }
 
+/* Tag on its own line after project links */
+.project-tag {
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-tag-inactive {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: oklch(0.25 0 0);
+  color: oklch(0.6 0 0);
+  border: 1px solid oklch(0.4 0 0 / 40%);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -423,6 +441,44 @@ img.next-image,
   margin-bottom: 0.75rem;
 }
 
+/* Project Links Row */
+.project-links-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Project Links */
+.project-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.65rem;
+  color: var(--muted-foreground);
+  background: var(--secondary);
+  border-radius: 0.25rem;
+  text-decoration: none;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.project-link:hover {
+  color: var(--foreground);
+  background: var(--border);
+}
+
 /* Bento Grid */
 .bento-grid {
   display: grid;
@@ -445,8 +501,14 @@ img.next-image,
 }
 
 .bento-item:hover {
-  opacity: 0.9;
+  opacity: 1;
 }
+
+.bento-item:hover .bento-image {
+  opacity: 1;
+  filter: none;
+}
+
 
 /* Workflow top left */
 .bento-item-0 {
