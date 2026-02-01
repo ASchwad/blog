@@ -9,6 +9,13 @@
   - Acceptance: clicking element X selects/activates element X (not a neighbor)
   - Acceptance: hover states visible, focus rings present
 
+## Images
+
+- Images use blur placeholders for better loading UX
+- Blur data is pre-generated and stored in `lib/blur-data.json`
+- After adding new images to `public/images/`, regenerate blur data: `node scripts/gen-blur-placeholders.mjs`
+- The build script runs this automatically before deploy
+
 ## Development Server
 
 - The dev server runs in a tmux session named `blog`

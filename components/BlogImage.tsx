@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import blurData from "../lib/blur-data.json";
 
 interface BlogImageProps {
   src: string;
@@ -14,6 +15,8 @@ export function BlogImage({ src, alt }: BlogImageProps) {
     width: number;
     height: number;
   } | null>(null);
+
+  const blurDataURL = (blurData as Record<string, string>)[src];
 
   useEffect(() => {
     const img = new window.Image();
@@ -79,6 +82,8 @@ export function BlogImage({ src, alt }: BlogImageProps) {
           height={dimensions?.height || 450}
           className="blog-image"
           style={getImageStyle()}
+          placeholder={blurDataURL ? "blur" : "empty"}
+          blurDataURL={blurDataURL}
           unoptimized
         />
       </span>
@@ -115,6 +120,8 @@ export function BlogImage({ src, alt }: BlogImageProps) {
               width={dimensions?.width || 800}
               height={dimensions?.height || 450}
               className="lightbox-image"
+              placeholder={blurDataURL ? "blur" : "empty"}
+              blurDataURL={blurDataURL}
               unoptimized
             />
           </div>
