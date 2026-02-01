@@ -2,7 +2,7 @@
 name: ui-validator
 description: Validates UI implementation via Playwright screenshots. Use when the user wants to verify frontend changes visually.
 tools: mcp__playwright__browser_navigate, mcp__playwright__browser_snapshot, mcp__playwright__browser_take_screenshot, mcp__playwright__browser_click, mcp__playwright__browser_resize, mcp__playwright__browser_hover, mcp__playwright__browser_close, Read, Glob
-model: haiku
+model: sonnet
 permissionMode: bypassPermissions
 ---
 
