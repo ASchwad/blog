@@ -1,9 +1,12 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import { BlogImage } from "./components/BlogImage";
+import { CodeTabs } from "./components/CodeTabs";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
+    // Use custom CodeTabs for tabbed code blocks
+    CodeTabs,
     // Use custom BlogImage for smart sizing and lightbox
     img: (props) => (
       <BlogImage src={props.src || ""} alt={props.alt || ""} />
