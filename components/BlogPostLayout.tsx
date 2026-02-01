@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import { TableOfContents } from "./TableOfContents";
 
 interface BlogPostLayoutProps {
   title: string;
@@ -26,6 +27,7 @@ export function BlogPostLayout({
         <title>{title}</title>
       </Head>
       <article>
+        <TableOfContents />
         <Link
           href="/blog"
           className="block text-sm text-muted-foreground hover:text-foreground transition-colors no-underline"
