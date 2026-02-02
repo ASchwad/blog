@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "dev:tmux": "tmux has-session -t blog 2>/dev/null && tmux attach -t blog || (PORT=$(node -e \"const net=require('net');let p=3000;(async()=>{while(p<3100){try{await new Promise((r,j)=>{const s=net.createServer();s.once('error',j);s.listen(p,()=>{s.close();r()})});console.log(p);break}catch{p++}}})()\") && tmux new-session -d -s blog -n 'Blog Dev' \"PORT=$PORT bun run dev\" && echo \"Started on port $PORT\" && tmux attach -t blog)",
-    "build": "node ./scripts/gen-blur-placeholders.mjs && node ./scripts/gen-rss.js && next build",
+    "build": "node ./scripts/gen-blur-placeholders.mjs && node ./scripts/gen-rss.js && next build --webpack",
     "start": "next start"
   },
   "dependencies": {
