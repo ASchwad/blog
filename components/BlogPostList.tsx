@@ -10,8 +10,9 @@ interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
-    title: "Claude Code: My Setup and Learnings",
-    description: "A walkthrough of my Claude Code configuration and workflow",
+    title: "Getting Started with Claude Code: My Tips and Setup",
+    description:
+      "Practical tips on Claude Code setup, VS Code extension, CLAUDE.md configuration, planning mode, and workflow best practices from daily usage.",
     date: "2026/1/26",
     tags: ["AI", "tooling"],
     href: "/blog/claude-code-setup",
