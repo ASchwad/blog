@@ -33,7 +33,7 @@ export default function Home() {
           Alexander Schoenenwald
         </h1>
         <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-          Hey! Thanks for stopping by! 👋
+          Hey, Thanks for stopping by! 👋
           <br />
           <br />
           I'm a generalist software engineer focused on solving data problems.
