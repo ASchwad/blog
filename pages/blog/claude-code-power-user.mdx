@@ -134,6 +134,18 @@ In `CLAUDE.md`:
 - **UI Validator agent**: Use `http://localhost:$DEV_PORT` (check `DEV_PORT` in `.env.local`, default 3000)
 ```
 
+## Ralph Loop and Spec-driven Development
+
+The amount of interactions you have with Claude Code is a spectrum and also depends on the type of feature you are doing.
+- If it's just quick edits, I usually right away prompt and edit.
+- If it is a small to mid-sized feature, I definitely use the plan mode, go back and forth to handle edge cases, think about architecture decisions and then start the implementation based on this plan with a fresh context.
+- For big features or even multiple in one run, Spec-driven development and Ralph loop come in handy.
+
+I like doing this especially for green field apps where I have multiple features in mind. Using superwhisper, I explain all my feature requirements, the edge cases I can think of and how to test it. I also let Claude augment this and write it all into a PRD file.
+Then you can start a ralph loop, which will just go ahead as long as it takes until the Requirements are met. This can take around an hour in my experience.
+
+You can check out this [project](https://github.com/ASchwad/boxflow). It is a mix of powerpoint and excalidraw. I have not looked into the code once and this was a couple Ralph Loop iterations with manual testing in between. Magical experience.
+
 ## Further Reading
 
 There is a lot of noise in the AI Coding field. My favorite sources around this (and more) are [Boris Cherny](https://x.com/bcherny) and [Simon Willison](https://simonwillison.net/).
