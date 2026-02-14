@@ -42,3 +42,6 @@ next-env.d.ts
 # generated
 /public/feed.xml
 .playwright-mcp/**
+
+# drafts symlink (local dev only)
+/pages/drafts

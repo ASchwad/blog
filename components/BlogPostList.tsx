@@ -6,9 +6,18 @@ interface BlogPost {
   date: string;
   tags: string[];
   href: string;
+  isDraft?: boolean;
 }
 
-export const posts: BlogPost[] = [
+const publishedPosts: BlogPost[] = [
+  {
+    title: "Claude Code Power User Tips",
+    description:
+      "Advanced Claude Code techniques including custom subagents, UI validation with Playwright MCP, skills, hooks, and workflow optimizations.",
+    date: "2026/2/14",
+    tags: ["AI", "tooling"],
+    href: "/blog/claude-code-power-user",
+  },
   {
     title: "Getting Started with Claude Code: My Tips and Setup",
     description:
@@ -45,6 +54,13 @@ export const posts: BlogPost[] = [
   },
 ];
 
+const draftPosts: BlogPost[] = [];
+
+const isDev = process.env.NODE_ENV === "development";
+export const posts: BlogPost[] = isDev
+  ? [...draftPosts, ...publishedPosts]
+  : publishedPosts;
+
 export function BlogPostList() {
   return (
     <div className="blog-post-list">
@@ -53,7 +69,10 @@ export function BlogPostList() {
         return (
           <Link key={post.href} href={post.href} className="post-item-link">
             <div className="post-item">
-              <h3>{post.title}</h3>
+              <h3>
+                {post.isDraft && <span className="draft-badge">DRAFT</span>}
+                {post.title}
+              </h3>
               <time dateTime={date.toISOString()}>
                 {date.toLocaleDateString("en-US", {
                   year: "numeric",
@@ -120,6 +139,17 @@ export function BlogPostList() {
           background: var(--muted);
           border-radius: 0.25rem;
           font-size: 0.8rem;
+        }
+        .draft-badge {
+          display: inline-flex;
+          padding: 0.125rem 0.5rem;
+          background: oklch(0.65 0.2 40);
+          color: white;
+          border-radius: 0.25rem;
+          font-size: 0.7rem;
+          font-weight: 600;
+          margin-right: 0.5rem;
+          vertical-align: middle;
         }
       `}</style>
     </div>

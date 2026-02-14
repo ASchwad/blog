@@ -10,7 +10,7 @@ import { BlogPostLayout } from "../../components/BlogPostLayout";
 
 ## My Journey to Claude Code
 
-Coming from a traditional coding background, letting go of line-by-line control felt (and still feels) weird. But in the bigger picture, code has always been a means to an end for me: building a working product that solves a problem. The implementation details are important, but secondary.
+Coming from a traditional coding background, letting go of line-by-line control felt (and still feels) weird. But in the bigger picture, code has always been a means to an end for me: building a working product that solves a problem. The implementation details are important, but secondary. The core question in Software Engineering today is "Am I building the **right software**?" and less "Am I building the **software right**?"
 
 With AI coding tools (Claude Code, Cursor, Codex, and others), the bottleneck of software engineering has shifted: it's now about understanding business requirements and validating implementations against them. Code is cheap now.
 
@@ -39,9 +39,15 @@ Thankfully the VS Code extension exists though! Having Claude Code integrated in
 
 ## Tooling
 
+### ClaudeBar for Tracking Sessions
+
+I'm using [ClaudeBar](https://github.com/nicobrenner/claudebar) for a nice overview of current sessions and the weekly limit. It also shows a quick indicator in the menu bar.
+
+![ClaudeBar macOS menu bar app displaying Claude Code session count and weekly token limit](/images/blog/claude-code-setup/claudebar.png)
+
 ### VS Code Extension vs. Terminal
 
-I'm using the VS Code extension for Claude Code 95% of the time.
+I'm using the VS Code extension for Claude Code of the time.
 
 Good:
 
@@ -55,15 +61,11 @@ Bad:
 - No direct access to memory functionality (via `#`)
 - Just a hunch, but I think the extension has crashed VS Code 3-4 times so far
 
-### ClaudeBar for Tracking Sessions
-
-I'm using [ClaudeBar](https://github.com/nicobrenner/claudebar) for a nice overview of current sessions and the weekly limit. It also shows a quick indicator in the menu bar.
-
-![ClaudeBar macOS menu bar app displaying Claude Code session count and weekly token limit](/images/blog/claude-code-setup/claudebar.png)
+Advice: Test both and see which one feels better to you. I recently also used the Terminal App again more often - especially the memory functionality and subagent seems better.
 
 ### CLIs for Tool Interaction
 
-Let Claude use the CLI commands of your tools. E.g. the GH CLI for checking out issues and PRs works really well. Claude might try to call the APIs via curl and managing auth is annoying for that. So I have a note about this in my `CLAUDE.md`.
+MCPs are IMO overrrated. Let Claude use the CLI commands of your tools. E.g. the GH CLI for checking out issues and PRs works really well. Claude might try to call the APIs via curl and managing auth is annoying for that. So I have a note about this in my `CLAUDE.md`.
 
 ### Voice Input for Faster Prompting
 
@@ -149,6 +151,8 @@ This gives Claude the ability to self-serve detailed information without bloatin
 - With that said, I think Claude Code is similarly capable in non-coding tasks. I recently wrote a whole business plan with financial planning for a grant application using Claude Code in VS Code. It worked really well using Markdown files and in the end creating PDF and Excel files. Software Engineering tooling like git and markdown is also perfect for this.
 
 ## Further Reading
+
+**Looking for more advanced tips?** Check out [Part 2: Claude Code Power User Tips](/blog/claude-code-power-user) for subagents, skills, hooks, and workflow optimizations.
 
 The AI coding space is noisy. Two voices I find consistently valuable:
 

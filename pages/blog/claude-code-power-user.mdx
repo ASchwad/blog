@@ -4,26 +4,34 @@ import { CodeTabs } from "../../components/CodeTabs";
 <BlogPostLayout
   title="Claude Code Power User Tips"
   description="Advanced Claude Code techniques including custom subagents, UI validation with Playwright MCP, skills, hooks, and workflow optimizations for power users."
-  date="2026/1/26"
+  date="2026/2/14"
   tags={["AI", "tooling"]}
 >
 
 ## Introduction
 
-???
+I have been recently talking A LOT about Claude Code with friends and acquaintances of varying technical level. Hello if you are one of them :) To just have a single document to send them to (and also for future me), I decided to write some notes on my Claude Code learnings. This is Part 2 for more technical users.  
+Check out [Part 1: Getting Started with Claude Code](/blog/claude-code-setup) if you are more interested in the general tips.
+
+I am currently heavily experimenting with Claude Code in the CI/CD pipeline. This will be a future blog post, so stay tuned if you are interested in that!
 
 ## Subagents: UI-Validator + Playwright MCP
 
-One of my favourite Claude hacks: Provide Playwright acccess to Claude Code and let it visually check its own work!
-When planning, think of the optimal state and acceptance criteria. Once the implementation is done, you can let check CC check the implementation visually against these requirements.
+One of my favourite Claude Code tips: Provide Claude Code access to Playwright and let it visually check its own work!
+When planning, think of the optimal state and acceptance criteria. Once the implementation is done, you can let CC check the implementation visually against your requirements and acceptance criteria. Claude can check its own work by this and create a feedback loop until a good state is reached.
 
-So to install the MCP for Playwright, run in your project directory:
+To install the MCP for Playwright, run this in your project directory:
 
 ```bash
 claude mcp add playwright npx '@playwright/mcp@latest'
 ```
 
-Additionally, I wrap this with a UI-Validator agent definition outlining the exact steps and guidelines for visual verification. The advantage about using a subagent is that we can have a separate config (vs. the one for the general session) for:
+**Tip:** You can use `npx playwright codegen` to record browser interactions and generate test scripts automatically. Start at a specific URL with `npx playwright codegen http://localhost:3000`.
+
+For example if you have a workflow that needs to be tested but it's a couple layers deep in your application, you could have deterministically defined Playwright steps to get to that point and only then hand over to Claude to do the dynamic testing part. This saves time and tokens.
+
+Additionally, I wrap this with a UI-Validator agent definition outlining the exact steps and guidelines for visual verification.
+The advantage about using a subagent is that we can have a separate config (vs. the one for the general session) for:
 
 - tools: You can specify exactly which tools you allow the subagent to use (`mcp__playwright__browser_navigate, mcp__playwright__browser_snapshot, mcp__playwright__browser_take_screenshot, mcp__playwright__browser_click, mcp__playwright__browser_resize, mcp__playwright__browser_hover, mcp__playwright__browser_close, Read, Glob`)
 - the model: currently I use Sonnet
@@ -31,19 +39,19 @@ Additionally, I wrap this with a UI-Validator agent definition outlining the exa
 
 ## Skills
 
-Skills are a simple way to extend Claude Code with specific task definitions and handy quick access via the slash `/` selector.
+Skills are a simple way to extend Claude Code with specific task definitions and handy quick access via the slash `/` selector. A couple examples that should be helpful for everybody:
 
-- `/handoff`: Summarize current Claude Session, start a new one and paste summary as context into the new session
-- `/commit`: Commit changes (with pre-commit checks, groups changes logically, commits in logical groups with message convention)
+- `/gh-issue <Write your story here>`: Define issue, find edge cases, check if there are overlapping GitHub issues. If yes: flag them to me, if no: add the issue to GH
+- `/commit`: Commit changes (with pre-commit checks, groups changes logically, commits in logical groups with message convention). Can clearly define in the Skill how commits should be structured
 - `/review`: Review and highlight code changes in feature branch vs. current dev branch
 
 ## Workflow Tweaks
 
 ### Using hooks
 
-Claude Code has extensive support for custom hooks to interact with the Claude Code lifecycle.
+Claude Code has extensive support for custom hooks to interact with the Claude Code lifecycle. Sky is the limit with these, but one of the classic cases for this IMO is making Claude more interactive by adding sounds to certain events in Claude Code.
 
-The only hook I am actively using is a notification hook on `Stop`. It plays a completion sound once the prompt is done.
+For example, I configured CC to always play a sound on the `Stop` hook. The same can be done for whenever Permissions are requested etc.
 
 <CodeTabs tabs={["completion-sound.sh", "settings.json"]}>
 ```sh
@@ -83,13 +91,19 @@ fi
 
 </CodeTabs>
 
+You can also easily adapt it via this [repo](https://peon-ping.vercel.app/). It uses some sound effects from the games Warcraft3 or Starcraft sounds. Takes me right back to the good old days.
+
 ### Extra Repo Clones for parallel prompting
 
 When working on multiple features in parallel, I usually create extra clones of the repository. You might find yourself working in multiple CC sessions in the same repo and this works ok as long as the changes are not overlapping. But this can get tricky fast.
 
-I usually work on one bigger features requiring planning and longer edits at a time. In the other directory (i.e. separate branch), I do a couple smaller features. By keeping separate clones, I avoid confusion and overlapping changes.
+I usually work on one bigger feature requiring planning and longer edits at a time. In the other directory (i.e. separate branch), I do a couple smaller features. By keeping separate clones, I avoid confusion and overlapping changes.
 
 (you can achieve the same effect by using git worktrees)
+
+Careful, this can be confusing if you do not build more tooling around it. To help my brain to directly identify the two different code bases in the frontend, each repository has a dedicated localhost port. I also show the feature branch the repository is currently in.
+
+![Browser tab showing localhost port and feature branch](/images/blog/claude-code-power-user/plot-code-browser.png)
 
 ### Using tmux sessions
 
@@ -107,7 +121,7 @@ For projects where I have multiple clones, I specify a port in the environment v
 ...
 ```
 
-In `ClAUDE.md`:
+In `CLAUDE.md`:
 
 ```markdown
 ## Development Server

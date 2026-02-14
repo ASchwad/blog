@@ -23,6 +23,14 @@
 - To attach to the session: `tmux attach -t blog`
 - Always check the tmux session when debugging build errors, runtime errors, or when you need to see console output
 
+## Writing
+
+- When reviewing blog posts or written content, make minimal changes
+- Only fix clear mistakes: grammar errors, typos, syntax issues
+- NEVER rewrite sentences to change tone or style
+- Preserve the author's voice - do not make it sound more formal or polished
+- Suggest improvements as comments rather than direct edits when unsure
+
 # General
 
 - ALWAYS use bun as package manager
