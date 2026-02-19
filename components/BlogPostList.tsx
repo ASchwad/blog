@@ -11,6 +11,14 @@ interface BlogPost {
 
 const publishedPosts: BlogPost[] = [
   {
+    title: "Gemini's Overlooked Superpower",
+    description:
+      "Google Gemini has a clear advantage over Anthropic and OpenAI: Video Understanding. Learn how to optimize video context for better results.",
+    date: "2026/2/14",
+    tags: ["AI", "Gemini", "Video"],
+    href: "/blog/optimizing-video-understanding",
+  },
+  {
     title: "Claude Code Power User Tips",
     description:
       "Advanced Claude Code techniques including custom subagents, UI validation with Playwright MCP, skills, hooks, and workflow optimizations.",

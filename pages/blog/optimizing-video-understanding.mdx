@@ -1,0 +1,165 @@
+import { BlogPostLayout } from "../../components/BlogPostLayout";
+import { CodeTabs } from "../../components/CodeTabs";
+import { Chat } from "../../components/Chat";
+import {
+  FrameSamplingGrid,
+  PlaybackSpeedComparison,
+  VideoLengthTimeline,
+  CroppingVisualization,
+  ResultsTable,
+} from "../../components/video-understanding";
+
+<BlogPostLayout
+  title="Gemini's Overlooked Superpower"
+  description="Google Gemini has a clear advantage over Anthropic and OpenAI: Video Understanding. In this post, I will share my experience with it and how to optimize the video context."
+  date="2026/2/14"
+  tags={["AI", "Gemini", "Video"]}
+>
+
+## Motivation
+
+When looking at coding, Google Gemini is usually far behind Anthropic and OpenAI. But the model has in my opinion the best out-of-the-box capabilities regarding multi-modality input: PDF, Image Analysis and foremost Video Understanding.
+
+But how well does that already work today? Could manufacturing companies already use this to get the perfect step-by-step process documentation? Could I film myself baking a cake and have the perfect recipe and instruction for that? With Agentic Coding and the upcoming Robotic Wave, capturing process knowledge will be crucial.
+
+## The Experiment
+
+To test this, I figured I should find a task with an interesting level of complexity. My E-Bike Engine required some maintenance, so I recorded it with a top-down view. I tried highlighting some elements towards the camera to see if the model picks it up, like showing specifically the torque of the screwdriver, the engine identification or the amount of screws I am using for a step.
+
+Here is a section of the video:
+
+<div className="flex justify-center my-4">
+  <video
+    src="/videos/ebike-maintenance-sample.mp4"
+    controls
+    muted
+    playsInline
+    preload="none"
+    poster="/videos/ebike-maintenance-poster.jpg"
+    className="max-w-xs rounded-lg"
+  >
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+## Results
+
+Summary: Good overview, misses details
+
+**What went well**
+
+- The temporal understanding of Gemini is great. It did a great job understanding the outline of my steps with (rough) timeframes for these chapters.
+- Perfect detection of the engine manufacturer and the ID of the engine although being upside down.
+
+**Missed details**
+
+- Screwdriver torque level incorrect
+- No difference in screws detected, screw count incorrect
+
+<Chat
+  assistantName="Gemini 3 Pro"
+  assistantGradient="from-blue-500 to-cyan-400"
+  messages={[
+    {
+      role: "user",
+      content: "Create a brief step by step process documentation along with the timestamps in the video",
+      attachment: { type: "video", name: "ebike-maintenance.mp4" },
+    },
+    {
+      role: "assistant",
+      content: `Here is a step-by-step documentation of the process shown in the video:
+
+**Step 1: Retrieve mounting hardware**
+Timestamp: 00:06
+Locate and pick up the necessary long mounting screws from the tool case.
+
+**Step 2: Position the housing cover**
+Timestamp: 00:22
+Pick up the metal motor housing cover (labeled Brose) and align it over the motor unit. Place it gently onto the assembly, ensuring the bolt holes line up.
+
+**Step 3: Insert screws manually**
+Timestamp: 00:37
+One by one, place the screws into the designated mounting holes around the perimeter of the cover by hand to ensure they are seated correctly before tightening.
+
+**Step 4: Fasten the screws**
+Timestamp: 00:58
+Using a cordless power drill, drive the screws into the housing. Proceed around the perimeter of the cover, tightening each screw individually until the cover is securely attached.`,
+    },
+    {
+      role: "user",
+      content: "How many screws? Which motor is it?",
+    },
+    {
+      role: "assistant",
+      content: `Based on the video, here are the answers to your questions:
+
+**How many screws?**
+There are 5 long mounting screws used to secure the motor housing cover.
+
+**Which motor is it?**
+It is a Brose e-bike motor.
+Specifically, the label shows the part number C16162-110 with a production date of 2016, which identifies it as the Brose Drive Gen 1 (Aluminium) motor (also known as the Brose Classic or Brose 1.0), commonly found in older Specialized Turbo Levo and Bulls e-bikes.`,
+},
+]}
+/>
+
+Specifically the screw type and count was frustrating to me. The ground truth is 4 short screws and 2 long screws. From a human perspective, this seems so simple. How could this PhD-level intelligence not understand that I was specifically showing each type and amount to the camera? It detected between 3-6 screws, varying with each prompt.
+
+## Context Engineering for Videos?
+
+It has the "intelligence" to do better. But how can we improve that? As usual with LLMs, it is about Context Engineering: adjusting the inputs to better fit the operating model of this model. But before we can improve our input, we need to understand how the model works.
+
+### How does Gemini interpret videos?
+
+Most crucial point: Gemini is using images, not videos for the interpretation. The images are sampled from input video with a default of one frame per second.
+So a 30-second video will result in 30 frames given to Gemini.
+
+<FrameSamplingGrid />
+
+> By default 1 frame per second (FPS) is sampled from the video. You might want to set low FPS (< 1) for long videos. This is especially useful for mostly static videos (e.g. lectures). Use a higher FPS for videos requiring granular temporal analysis, such as fast-action understanding or high-speed motion tracking.
+> [Google Documentation](https://ai.google.dev/gemini-api/docs/video-understanding#custom-frame-rate)
+
+If we have fast or detailed sequences, one frame per second could be too little for Gemini to properly understand the video. It might just never "see" the context that could be valuable to our process.
+
+### Tuning: Increase Sampling Rate
+
+We can either adjust the parameter in the API to adjust the FPS or manually slow down our video.
+
+<PlaybackSpeedComparison />
+
+### Tuning: Crop video timeframe to relevant process step
+
+You might have heard of the "needle in a haystack" problem. When looking for specific information, it gets increasingly hard to find it with the amount of context we provide.
+
+<VideoLengthTimeline />
+Just think of it like watching a security camera footage and searching for a
+theft. As a human it will be way easier to find the moment of the theft if you
+know it happened between 3pm and 5pm instead of watching the tape of the last 3
+days.
+
+The same applies for LLMs. So we should try limiting the context to the relevant
+chapters. Luckily our earlier outline already highlighted in which chapter we
+prepare the screws, so we can focus on that specific timeframe in the video.
+
+Instead of giving a couple of minutes of footage to Gemini, we can reduce it to
+30 seconds.
+
+### Tuning: Zoom-in in video
+
+It's only a small-scale zoom-in but enough to help out Gemini. I could have been even more aggressive with the zoom. Any context or token that could be saved, should be saved!
+
+<CroppingVisualization />
+
+### Optimized Results
+
+When combining the techniques, we can finally get the right outputs! Here are all my test runs:
+
+<ResultsTable />
+
+## Conclusion
+
+Just a couple of powerful optimization techniques to get better outputs from Gemini for Video Analysis. I think to make use of them in an automated way and for a variety of videos, it requires a major engineering effort. Thanks to the generally well-performing overview to know in which timeframes specific actions are done, we can automatically zoom in (cropping the video to these timeframes + increasing the amount of frames for the relevant parts) on these sections of the video to get the details right. I think some classic Computer Vision could be another valuable agent tool and potentially help bring more determinism to the process.
+
+In any case, very good default behaviors of Google Gemini for Video Understanding and the perfect basis if you want to build on top of it for a general purpose video analysis agent.
+
+</BlogPostLayout>
