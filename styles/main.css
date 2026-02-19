@@ -120,6 +120,64 @@ img.next-image,
   }
 }
 
+/* Video Understanding Blog - Animation Keyframes */
+@keyframes frameAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes barGrow {
+  from {
+    width: 0%;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes turnRed {
+  0% {
+    background-color: oklch(0.65 0.2 145);
+  }
+  100% {
+    background-color: oklch(0.55 0.2 25);
+  }
+}
+
+@keyframes shrinkOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 oklch(0.65 0.15 250 / 40%);
+  }
+  50% {
+    box-shadow: 0 0 0 8px oklch(0.65 0.15 250 / 0%);
+  }
+}
+
 .lightbox-close {
   position: absolute;
   top: 1rem;
