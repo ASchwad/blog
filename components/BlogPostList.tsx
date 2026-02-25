@@ -151,8 +151,8 @@ export function BlogPostList() {
         .draft-badge {
           display: inline-flex;
           padding: 0.125rem 0.5rem;
-          background: oklch(0.65 0.2 40);
-          color: white;
+          background: var(--primary);
+          color: var(--primary-foreground);
           border-radius: 0.25rem;
           font-size: 0.7rem;
           font-weight: 600;

@@ -1,0 +1,10 @@
+{
+  "todos": [
+    { "text": "Read feedback and understand the issue", "done": true },
+    { "text": "Locate the session route and components", "done": true },
+    { "text": "Identify orange button/UI elements", "done": true },
+    { "text": "Change colors from orange to green", "done": true },
+    { "text": "Verify changes with ui-validator", "done": true },
+    { "text": "Commit and push changes", "done": false }
+  ]
+}

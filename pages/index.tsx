@@ -52,12 +52,12 @@ export default function Home() {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="social-button group inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-card text-card-foreground no-underline transition-all duration-200 hover:border-[oklch(0.65_0.2_40)] hover:shadow-[0_0_20px_rgba(255,100,50,0.15)]"
+              className="social-button group inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-card text-card-foreground no-underline transition-all duration-200 hover:border-primary hover:shadow-[0_0_20px_rgba(34,197,94,0.15)]"
             >
-              <span className="transition-all duration-200 group-hover:text-[oklch(0.65_0.2_40)] group-hover:scale-110">
+              <span className="transition-all duration-200 group-hover:text-primary group-hover:scale-110">
                 {social.icon}
               </span>
-              <span className="text-sm font-medium transition-colors duration-200 group-hover:text-[oklch(0.65_0.2_40)]">
+              <span className="text-sm font-medium transition-colors duration-200 group-hover:text-primary">
                 {social.name}
               </span>
             </a>

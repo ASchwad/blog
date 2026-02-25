@@ -1,0 +1,22 @@
+Fix the following issue reported by a user:
+
+**Route:** /dashboard/sessions/0727af68-54bb-44b9-8160-0beae523a928
+
+**Comment:** all buttons etc are still orange, I want that to be green
+
+The full task entry is in dev-notes/entries/4b0f6e4f-bf05-4983-a1ec-ebd55ad04097/feedback.md. Read it for complete context.
+
+IMPORTANT: As you work, track your tasks by writing to dev-notes/entries/4b0f6e4f-bf05-4983-a1ec-ebd55ad04097/tasks.json.
+Format: { "todos": [{ "text": "task description", "done": false }] }
+Update the file as you complete each task (set "done": true). This powers the live progress UI.
+Example:
+{
+  "todos": [
+    { "text": "Identify the issue", "done": true },
+    { "text": "Fix the component", "done": false },
+    { "text": "Run type-check", "done": false }
+  ]
+}
+
+After completing your changes, commit with a descriptive message and push to the remote branch.
+Run: git add -A && git commit -m "fix: <short description>" && git push
