@@ -40,7 +40,7 @@ export function Layout({ children }: LayoutProps) {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`text-sm transition-colors hover:text-foreground ${
+                  className={`text-sm transition-colors hover:text-primary ${
                     isActive ? "text-foreground font-medium" : "text-muted-foreground"
                   }`}
                 >
@@ -59,7 +59,7 @@ export function Layout({ children }: LayoutProps) {
           <span>
             <time>{YEAR}</time> © Alexandre Schoenenwald.
           </span>
-          <a href="/feed.xml" className="hover:text-foreground transition-colors">
+          <a href="/feed.xml" className="hover:text-primary transition-colors">
             RSS
           </a>
         </small>

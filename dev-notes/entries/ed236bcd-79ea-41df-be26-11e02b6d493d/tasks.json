@@ -1,0 +1,13 @@
+{
+  "todos": [
+    { "text": "Identify all orange elements on the dashboard/sessions page", "done": true },
+    { "text": "Fix blog tag colors from orange to green", "done": true },
+    { "text": "Fix prose link colors from orange to green", "done": true },
+    { "text": "Fix View all link hover color", "done": true },
+    { "text": "Fix navigation links hover color", "done": true },
+    { "text": "Fix RSS link hover color", "done": true },
+    { "text": "Fix Back to Blog link hover color", "done": true },
+    { "text": "Test changes visually", "done": true },
+    { "text": "Commit and push changes", "done": false }
+  ]
+}

@@ -56,7 +56,7 @@ export function BlogPostLayout({
         <TableOfContents />
         <Link
           href="/blog"
-          className="block text-sm text-muted-foreground hover:text-foreground transition-colors no-underline"
+          className="block text-sm text-muted-foreground hover:text-primary transition-colors no-underline"
         >
           &larr; Back to Blog posts
         </Link>

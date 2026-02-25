@@ -73,7 +73,7 @@ export default function Home() {
           </h2>
           <Link
             href="/blog"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors"
           >
             View all →
           </Link>

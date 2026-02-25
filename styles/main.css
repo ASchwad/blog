@@ -211,12 +211,12 @@ img.next-image,
 }
 
 .prose a {
-  color: oklch(0.65 0.15 65);
+  color: oklch(0.65 0.15 145);
   text-decoration: none;
 }
 
 .prose a:hover {
-  color: oklch(0.55 0.15 65);
+  color: oklch(0.55 0.15 145);
   text-decoration: none;
 }
 
@@ -414,9 +414,9 @@ img.next-image,
   padding: 0.125rem 0.625rem;
   font-size: 0.75rem;
   font-weight: 500;
-  background-color: oklch(0.25 0.08 65);
-  color: oklch(0.75 0.15 65);
-  border: 1px solid oklch(0.65 0.15 65 / 40%);
+  background-color: oklch(0.25 0.08 145);
+  color: oklch(0.75 0.15 145);
+  border: 1px solid oklch(0.65 0.15 145 / 40%);
 }
 
 /* Tag on its own line after project links */
@@ -450,7 +450,7 @@ img.next-image,
 .prose {
   --tw-prose-body: var(--foreground);
   --tw-prose-headings: var(--foreground);
-  --tw-prose-links: oklch(0.65 0.15 65);
+  --tw-prose-links: oklch(0.65 0.15 145);
   --tw-prose-bold: var(--foreground);
   --tw-prose-counters: var(--muted-foreground);
   --tw-prose-bullets: var(--muted-foreground);
