@@ -4,6 +4,6 @@
     { "text": "Find the component/page that renders the session details", "done": true },
     { "text": "Change the name to 'Sepp Meier'", "done": true },
     { "text": "Verify the change", "done": true },
-    { "text": "Commit and push changes", "done": false }
+    { "text": "Commit and push changes", "done": true }
   ]
 }
