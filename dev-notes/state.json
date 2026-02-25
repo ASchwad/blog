@@ -4,31 +4,33 @@
     "autoPush": true
   },
   "progress": {
-    "currentEntry": "6c322faa-d232-4c21-b720-e1edf15c6ac9",
+    "currentEntry": "334abbb5-8d5c-4c23-bb96-924c54cbab48",
     "step": "starting",
     "detail": "Launching Claude Code session..."
   },
   "entries": [
     {
       "id": "6c322faa-d232-4c21-b720-e1edf15c6ac9",
-      "status": "processing",
+      "status": "done",
       "route": "/dashboard/sessions/0727af68-54bb-44b9-8160-0beae523a928",
       "comment": "Name is actually Alexandre Schoenenwald",
       "hasScreenshot": false,
       "hasDom": false,
       "failedRequestCount": 0,
       "createdAt": "2026-02-25T16:07:27.256Z",
-      "startedAt": "2026-02-25T16:07:28.451Z"
+      "startedAt": "2026-02-25T16:07:28.451Z",
+      "completedAt": "2026-02-25T16:10:11.905Z"
     },
     {
       "id": "334abbb5-8d5c-4c23-bb96-924c54cbab48",
-      "status": "pending",
+      "status": "processing",
       "route": "/dashboard/sessions/0727af68-54bb-44b9-8160-0beae523a928",
       "comment": "Change the primary colour to green",
       "hasScreenshot": false,
       "hasDom": false,
       "failedRequestCount": 0,
-      "createdAt": "2026-02-25T16:07:44.904Z"
+      "createdAt": "2026-02-25T16:07:44.904Z",
+      "startedAt": "2026-02-25T16:10:12.407Z"
     }
   ]
 }

@@ -3,6 +3,6 @@
     { "text": "Identify where the name data is stored for session", "done": true },
     { "text": "Update the name to Alexandre Schoenenwald", "done": true },
     { "text": "Run type-check to verify changes", "done": true },
-    { "text": "Commit and push changes", "done": false }
+    { "text": "Commit and push changes", "done": true }
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "todos": [
+    { "text": "Explore the dashboard session route", "done": true },
+    { "text": "Identify where primary color is defined", "done": true },
+    { "text": "Change primary color to green", "done": true },
+    { "text": "Verify the changes", "done": true },
+    { "text": "Commit and push changes", "done": false }
+  ]
+}
