@@ -57,7 +57,7 @@ export function Layout({ children }: LayoutProps) {
       <footer className="mt-32">
         <small className="flex justify-between text-muted-foreground">
           <span>
-            <time>{YEAR}</time> © Alexander Schoenenwald.
+            <time>{YEAR}</time> © Alexandre Schoenenwald.
           </span>
           <a href="/feed.xml" className="hover:text-foreground transition-colors">
             RSS

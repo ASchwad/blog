@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   const meta = {
-    title: "Alexander Schoenenwald",
+    title: "Alexandre Schoenenwald",
     description: "Generalist software engineer focused on solving data problems. Building products in the Applied AI space.",
     image: "https://avatars.githubusercontent.com/u/33654656?v=4",
   };

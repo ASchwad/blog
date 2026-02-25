@@ -30,7 +30,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="mb-16">
         <h1 className="text-4xl font-bold mb-4 tracking-tight">
-          Alexander Schoenenwald
+          Alexandre Schoenenwald
         </h1>
         <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
           Hey, Thanks for stopping by! 👋
