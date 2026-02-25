@@ -4,6 +4,6 @@
     { "text": "Find the home page component", "done": true },
     { "text": "Change heading color to red", "done": true },
     { "text": "Validate UI changes", "done": true },
-    { "text": "Commit and push changes", "done": false }
+    { "text": "Commit and push changes", "done": true }
   ]
 }
