@@ -1,0 +1,24 @@
+Fix the following issue reported by a user:
+
+**Route:** /dashboard/sessions/4822e64f-10a3-4f92-b64b-28ab3343354e
+
+**Comment:** Change name to "Sepp Meier"
+
+There are 1 failed HTTP requests captured — check the details in dev-notes/entries/97b59d86-57a1-48e0-89ee-c92c03d78b82/feedback.md.
+
+The full task entry is in dev-notes/entries/97b59d86-57a1-48e0-89ee-c92c03d78b82/feedback.md. Read it for complete context.
+
+IMPORTANT: As you work, track your tasks by writing to dev-notes/entries/97b59d86-57a1-48e0-89ee-c92c03d78b82/tasks.json.
+Format: { "todos": [{ "text": "task description", "done": false }] }
+Update the file as you complete each task (set "done": true). This powers the live progress UI.
+Example:
+{
+  "todos": [
+    { "text": "Identify the issue", "done": true },
+    { "text": "Fix the component", "done": false },
+    { "text": "Run type-check", "done": false }
+  ]
+}
+
+After completing your changes, commit with a descriptive message and push to the remote branch.
+Run: git add -A && git commit -m "fix: <short description>" && git push

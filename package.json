@@ -33,6 +33,7 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
+    "@anthropic-ai/claude-code": "^2.1.56",
     "@types/mdx": "^2.0.13",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
